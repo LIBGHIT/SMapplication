@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+    <title>Smart maint</title>
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="robots" content="">
+
+    <!-- Open Graph Meta -->
+    <meta property="og:title" content="">
+    <meta property="og:site_name" content="">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/assets/img/favicon.png}">
+
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" id="css-main" th:href="@{/assets/admincss/dashmix.min.css}">
+    <!-- END Stylesheets -->
+</head>
+<body>
+<div id="page-container" class="sidebar-o sidebar-dark enable-page-overlay side-scroll page-header-fixed main-content-narrow">
+    <!-- Side Overlay-->
+    <div th:insert="side-overlay.html"></div>
+    <!-- END Side Overlay -->
+
+    <!-- Sidebar -->
+    <div th:insert="sidebar.html"></div>
+    <!-- END Sidebar -->
+
+    <!-- Header -->
+    <div th:insert="headerAdmin.html"></div>
+    <!-- END Header -->
+
+            <!-- Main Container -->
+            <main id="main-container">
+                <!-- Hero -->
+                <div class="bg-body-light">
+                    <div class="content content-full">
+                        <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
+                            <h1 class="flex-sm-fill font-size-h2 font-w400 mt-2 mb-0 mb-sm-2">Data Users</h1>
+                            <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item">Data</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Users</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <!-- END Hero -->
+
+                <!-- Page Content -->
+                <div class="content">
+                    <!-- Users Table -->
+                    <div class="block block-rounded">
+                        <div class="block-header block-header-default">
+                            <h3 class="block-title">Users ([[${totalUsers}]])</h3>
+                            <div class="block-options">
+                            </div>
+                        </div>
+                        <div class="block-content">
+                            <table class="table table-hover table-vcenter">
+                                <thead>
+                                <tr style="border: 1px solid black;">
+                                    <th class="text-center" style="width: 30px; border: 1px solid black; display: none;">ID</th>
+                                    <th class="text-center" style="width: 60px; border: 1px solid black;">First Name</th>
+                                    <th class="text-center" style="width: 60px; border: 1px solid black;">Last Name</th>
+                                    <th class="text-center" style="width: 80px; border: 1px solid black;">Email</th>
+                                    <th class="text-center" style="width: 60px; border: 1px solid black;">Sector</th>
+                                    <th class="text-center" style="width: 150px; border: 1px solid black;">Skills</th>
+                                    <th class="text-center" style="width: 100px; border: 1px solid black;">CV</th>
+                                    <th class="text-center" style="width: 70px; border: 1px solid black;">Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody th:each="user : ${users}">
+                                <tr>
+                                    <td rowspan="4" style="border: 1px solid black; display: none;" th:text="${user.ID_User}"></td>
+                                    <td rowspan="4" style="border: 1px solid black;" th:text="${user.firstName}"></td>
+                                    <td rowspan="4" style="border: 1px solid black;" th:text="${user.lastName}"></td>
+                                    <td rowspan="4" style="border: 1px solid black;" th:text="${user.email}"></td>
+                                    <td rowspan="4" style="border: 1px solid black;" th:text="${user.sector != null && !user.sector.isEmpty() ? user.sector : 'aucun'}"></td>
+                                    <td>
+                                        <table th:if="${user.role == 'ROLE_USER'}"  style="width: 100%;">
+                                            <tr>
+                                                <td style="border: 1px solid black;" th:text="${user.skills.skill_1}"></td>
+                                                <td style="border: 1px solid black;" th:text="${user.skills.skill_1_experience}">Expert</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td rowspan="4" style="border: 1px solid black;">
+                                        <a th:if="${user.Id_CV != null && !user.Id_CV.isEmpty()}" th:href="@{/files/{id}(id=${user.Id_CV})}" target="_blank">Télécharger</a>
+                                    </td>
+
+                                    <td rowspan="4" style="border: 1px solid black;">
+
+                                        <a class="btn btn-sm btn-light" th:href="@{/deleteUser/{id}(id=${user.ID_User})}" onclick="return confirm('Voulez-vous vraiment supprimer cet utilisateur ?')">
+                                            <i class="fa fa-fw fa-times text-danger" title="delete"></i>
+                                        </a>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table style="width: 100%;">
+                                            <tr>
+                                                <td style="border: 1px solid black;" th:text="${user.skills.skill_2}">Skill 2</td>
+                                                <td style="border: 1px solid black;" th:text="${user.skills.skill_2_experience}">Experienced</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table style="width: 100%;">
+                                            <tr>
+                                                <td style="border: 1px solid black;" th:text="${user.skills.skill_3}">Skill 3</td>
+                                                <td style="border: 1px solid black;" th:text="${user.skills.skill_3_experience}">Expert</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table style="width: 100%;">
+                                            <tr>
+                                                <td style="border: 1px solid black;" th:text="${user.skills.skill_4 != null && !user.skills.skill_4.isEmpty() ? user.skills.skill_4 : 'aucun'}">Skill 4</td>
+                                                <td style="border: 1px solid black;" th:text="${user.skills.skill_4_experience}">Experienced</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                            <div class="block-footer">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <nav aria-label="Page navigation">
+                                            <ul class="pagination">
+                                                <li class="page-item" th:classappend="${currentPage == 0 ? 'disabled' : ''}">
+                                                    <a class="page-link" th:href="@{/users(page=${currentPage - 1}, size=${size})}">Previous</a>
+                                                </li>
+                                                <li class="page-item" th:classappend="${currentPage == totalPages - 1 ? 'disabled' : ''}">
+                                                    <a class="page-link" th:href="@{/users(page=${currentPage + 1}, size=${size})}">Next</a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+
+                                    </div>
+                                    <div class="col-md-6 text-md-right">
+                                        Page <span th:text="${currentPage + 1}"></span> of <span th:text="${totalPages}"></span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <!-- END Users Table -->
+
+
+                    <!-- Sm Users table-->
+
+                <div class="content">
+                    <!-- Hover Table -->
+                    <div class="block block-rounded">
+                        <div class="block-header block-header-default">
+                            <h3 class="block-title">SM Users ([[${totalSmUsers}]])</h3>
+                            <div class="block-options">
+                            </div>
+                        </div>
+                        <div class="block-content">
+                            <table class="table table-hover table-vcenter">
+                                <thead>
+                                <tr style="border: 1px solid black;">
+                                    <th class="text-center" style="width: 30px; border: 1px solid black; display: none;">ID</th>
+                                    <th class="text-center" style="width: 60px; border: 1px solid black;">First Name</th>
+                                    <th class="text-center" style="width: 60px; border: 1px solid black;">Last Name</th>
+                                    <th class="text-center" style="width: 80px; border: 1px solid black;">Email</th>
+                                    <th class="text-center" style="width: 70px; border: 1px solid black;">Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody  th:each="user : ${smusers}">
+                                <tr>
+                                    <td rowspan="4" style="border: 1px solid black; display: none;" th:text="${user.ID_User}"></td>
+                                    <td rowspan="4" style="border: 1px solid black;" th:text="${user.firstName}"></td>
+                                    <td rowspan="4" style="border: 1px solid black;" th:text="${user.lastName}"></td>
+                                    <td rowspan="4" style="border: 1px solid black;" th:text="${user.email}"></td>
+                                    <td rowspan="4" style="border: 1px solid black;">
+                                        <a class="btn btn-sm btn-light" th:href="@{/deleteUser/{id}(id=${user.ID_User})}" onclick="return confirm('Voulez-vous vraiment supprimer cet utilisateur ?')">
+                                            <i class="fa fa-fw fa-times text-danger" title="delete"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                            <div class="block-footer">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <nav aria-label="Page navigation">
+                                            <ul class="pagination">
+                                                <li class="page-item" th:classappend="${currentSmPage == 0 ? 'disabled' : ''}">
+                                                    <a class="page-link" th:href="@{/smusers(page=${currentSmPage - 1}, size=${size})}">Previous</a>
+                                                </li>
+                                                <li class="page-item" th:classappend="${currentSmPage == totalSmPages - 1 ? 'disabled' : ''}">
+                                                    <a class="page-link" th:href="@{/smusers(page=${currentSmPage + 1}, size=${size})}">Next</a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+
+                                    </div>
+                                    <div class="col-md-6 text-md-right">
+                                        Page <span th:text="${currentSmPage + 1}"></span> of <span th:text="${totalSmPages}"></span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- END Sm Users Page -->
+
+
+                <!-- Admin table -->
+
+                <div class="content">
+                    <!-- Hover Table -->
+                    <div class="block block-rounded">
+                        <div class="block-header block-header-default">
+                            <h3 class="block-title">Admins ([[${totalAdmins}]])</h3>
+                            <div class="block-options">
+                            </div>
+                        </div>
+                        <div class="block-content">
+                            <table class="table table-hover table-vcenter">
+                                <thead>
+                                <tr style="border: 1px solid black;">
+                                    <th class="text-center" style="width: 30px; border: 1px solid black; display: none;">ID</th>
+                                    <th class="text-center" style="width: 60px; border: 1px solid black;">First Name</th>
+                                    <th class="text-center" style="width: 60px; border: 1px solid black;">Last Name</th>
+                                    <th class="text-center" style="width: 80px; border: 1px solid black;">Email</th>
+                                    <th class="text-center" style="width: 70px; border: 1px solid black;">Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody  th:each="user : ${admins}">
+                                <tr>
+                                    <td rowspan="4" style="border: 1px solid black; display: none;" th:text="${user.ID_User}"></td>
+                                    <td rowspan="4" style="border: 1px solid black;" th:text="${user.firstName}"></td>
+                                    <td rowspan="4" style="border: 1px solid black;" th:text="${user.lastName}"></td>
+                                    <td rowspan="4" style="border: 1px solid black;" th:text="${user.email}"></td>
+                                    <td rowspan="4" style="border: 1px solid black;">
+                                        <a class="btn btn-sm btn-light" th:href="@{/deleteUser/{id}(id=${user.ID_User})}" onclick="return confirm('Voulez-vous vraiment supprimer cet utilisateur ?')">
+                                            <i class="fa fa-fw fa-times text-danger" title="delete"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="block-footer">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <nav aria-label="Page navigation">
+                                            <ul class="pagination">
+                                                <li class="page-item" th:classappend="${currentPageAdmin == 0 ? 'disabled' : ''}">
+                                                    <a class="page-link" th:href="@{/admins(page=${currentPageAdmin - 1}, size=${size})}">Previous</a>
+                                                </li>
+                                                <li class="page-item" th:classappend="${currentPageAdmin == totalPageAdmins - 1 ? 'disabled' : ''}">
+                                                    <a class="page-link" th:href="@{/admins(page=${currentPageAdmin + 1}, size=${size})}">Next</a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+
+                                    </div>
+                                    <div class="col-md-6 text-md-right">
+                                        Page <span th:text="${currentPageAdmin + 1}"></span> of <span th:text="${totalPageAdmins}"></span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- END Admins Page -->
+
+            </main>
+            <!-- END Main Container -->
+
+            <!-- Footer -->
+            <footer id="page-footer" class="bg-body-light">
+                <div class="content py-0">
+                    <div class="row font-size-sm">
+
+                        <div class="col-sm-6 order-sm-1 text-center text-sm-left">
+                            <a class="font-w600">Smart maint</a> &copy; <span data-toggle="year-copy"></span>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- END Footer -->
+        </div>
+        <!-- END Page Container -->
+
+
+        <script th:src="@{/assets/adminjs/dashmix.core.min.js}"></script>
+
+
+        <script th:src="@{/assets/adminjs/dashmix.app.min.js}"></script>
+    </body>
+</html>

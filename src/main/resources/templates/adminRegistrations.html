@@ -1,0 +1,160 @@
+<!doctype html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+  <title>Smart maint</title>
+
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <meta name="robots" content="">
+
+  <!-- Open Graph Meta -->
+  <meta property="og:title" content="">
+  <meta property="og:site_name" content="">
+  <meta property="og:description" content="">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="">
+  <meta property="og:image" content="">
+
+  <link rel="shortcut icon" type="image/x-icon" th:href="@{/assets/img/favicon.png}">
+
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" id="css-main" th:href="@{/assets/admincss/dashmix.min.css}">
+  <!-- END Stylesheets -->
+</head>
+<body>
+<div id="page-container" class="sidebar-o sidebar-dark enable-page-overlay side-scroll page-header-fixed main-content-narrow">
+  <!-- Side Overlay-->
+  <div th:insert="side-overlay.html"></div>
+  <!-- END Side Overlay -->
+
+  <!-- Sidebar -->
+  <div th:insert="sidebar.html"></div>
+  <!-- END Sidebar -->
+
+  <!-- Header -->
+  <div th:insert="headerAdmin.html"></div>
+  <!-- END Header -->
+  <!-- Main Container -->
+  <main id="main-container">
+    <!-- Hero -->
+    <div class="bg-body-light">
+      <div class="content content-full">
+        <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
+          <h1 class="flex-sm-fill font-size-h2 font-w400 mt-2 mb-0 mb-sm-2">New Registrations</h1>
+        </div>
+      </div>
+    </div>
+    <!-- END Hero -->
+
+    <!-- Page Content -->
+    <div class="content content-full content-boxed">
+
+<!--      <ul>-->
+<!--        <li class="alert alert-danger col-lg-6 offset-lg-3 col-md-8 offset-md-2" role="alert"-->
+<!--            th:each="error : ${#fields.errors('blog.*')}" th:text="${error}" />-->
+<!--      </ul>-->
+      <!-- New Post -->
+
+        <div class="alert alert-danger" role="alert"
+            th:each="error : ${#fields.errors('adminUser.*')}" th:text="${error}" />
+
+        <div class="alert alert-danger" role="alert"
+            th:if="${checkEmail}">Email already exists !</div>
+
+        <div class="alert alert-danger" role="alert"
+            th:if="${checkPassResult}">Confirmation password does not match !</div>
+
+      <div class="alert alert-success" role="alert" th:if="${registerSuccess}">
+        User added successfully!
+      </div>
+
+      <form th:action="@{/admin/Registrations}" th:object="${adminUser}" method="POST" enctype="multipart/form-data">
+        <div class="block">
+          <div class="block-content">
+            <div class="row justify-content-center push">
+              <div class="col-md-10">
+                <div class="form-group">
+                  <label>First Name</label>
+                  <input type="text" th:field="*{firstName}" class="form-control"   placeholder="Enter the first name">
+                </div>
+                <div class="form-group">
+                  <label>Last Name</label>
+                  <input type="text" th:field="*{lastName}" class="form-control"   placeholder="Enter the last name">
+                </div>
+                <div class="form-group">
+                  <label>Email</label>
+                  <input type="text" th:field="*{email}" class="form-control"  placeholder="Enter the email">
+                </div>
+                <div class="form-group">
+                  <label>Password</label>
+                  <input type="password" th:field="*{password}" class="form-control"   placeholder="Enter the password">
+                </div>
+                <div class="form-group">
+                  <label>Password Confirmation</label>
+                  <input type="password" th:field="*{checkPass}" class="form-control"   placeholder="Enter the password confirmation">
+                </div>
+                <div class="form-group">
+                  <label>Role</label>
+                  <select th:field="*{roleStr}" class="form-control" aria-label=".form-select-lg example">
+                    <option selected value="ROLE_PERSONEL">SM User</option>
+                    <option value="ROLE_ADMIN">Admin User</option>
+                  </select>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="block-content bg-body-light">
+            <div class="row justify-content-center push">
+              <div class="col-md-10">
+                <button type="submit" class="btn btn-alt-primary">
+                  <i class="fa fa-fw fa-check mr-1"></i> Register
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      <!-- END New Post -->
+    </div>
+    <!-- END Page Content -->
+  </main>
+  <!-- END Main Container -->
+
+  <!-- Footer -->
+  <footer id="page-footer" class="bg-body-light">
+    <div class="content py-0">
+      <div class="row font-size-sm">
+
+        <div class="col-sm-6 order-sm-1 text-center text-sm-left">
+          <a class="font-w600" >Smart maint</a> &copy; <span data-toggle="year-copy"></span>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- END Footer -->
+</div>
+<!-- END Page Container -->
+
+
+<script th:src="@{/assets/adminjs/dashmix.core.min.js}"></script>
+
+<!--
+    Dashmix JS
+
+    Custom functionality including Blocks/Layout API as well as other vital and optional helpers
+    webpack is putting everything together at assets/_js/main/app.js
+-->
+<script th:src="@{/assets/adminjs/dashmix.app.min.js}"></script>
+
+<!-- Page JS Plugins -->
+<script th:src="@{/assets/adminjs/plugins/ckeditor/ckeditor.js}"></script>
+
+<!-- Page JS Helpers (CKEditor plugin) -->
+<script>jQuery(function(){CKEDITOR.config.height = '450px';Dashmix.helpers(['ckeditor']);});</script>
+</body>
+</html>

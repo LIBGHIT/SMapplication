@@ -1,0 +1,828 @@
+<!doctype html>
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Smart Maint</title>
+    <meta name="description" content="Smart Maint">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/assets/img/favicon.png}">
+    <!-- Place favicon.ico in the root directory -->
+
+    <!-- CSS here -->
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/animate.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/magnific-popup.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/fontawesome-all.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/odometer.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/slick.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/tg-cursor.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/default.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/jarallax.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/style.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/responsive.css}">
+</head>
+<body>
+
+<!-- Preloader-start -->
+<div id="preloader">
+    <div class="ta-preloader-block">
+        <div class="ta-spinner-eff">
+            <div class="ta-bar ta-bar-top"></div>
+            <div class="ta-bar ta-bar-right"></div>
+            <div class="ta-bar ta-bar-bottom"></div>
+            <div class="ta-bar ta-bar-left"></div>
+        </div>
+    </div>
+</div>
+<!-- Preloader-start-end -->
+
+<!-- Scroll-top -->
+<button class="scroll-top scroll-to-target" data-target="html">
+    <i class="fas fa-level-up-alt"></i>
+</button>
+<!-- Scroll-top-end-->
+
+<!-- header-area -->
+<div  th:replace="~{header :: header}"></div>
+<!-- header-area-end -->
+<div style="position: absolute; top: 100px; right: 20px;">
+
+    <div sec:authorize="isAuthenticated()" style=" bottom: 100px;margin-top: 20px;margin-left: 20px; right: 20px; width: 300px; border: 1px solid #ccc; padding: 10px; font-size: 18px; color: #333; background-color: #f5f5f5; border-radius: 10px;">
+        <p style="font-size: 20px;white-space: nowrap; text-align: center; font-family: Arial;">Welcome <span th:text="${firstName}" style="color: blue;">Prénom</span> <span th:text="${lastName}" style="color: blue;">Nom</span>!</p>
+    </div>
+</div>
+<!-- mian-area -->
+<main>
+
+    <!-- banner-area -->
+    <section class="banner-area">
+        <div class="banner-shape" data-background="assets/img/banner/banner_shape.jpg"></div>
+        <div class="banner-bg" data-background="assets/img/banner/banner_bg.jpg">
+            <div class="banner-content">
+                <h2 class="title wow fadeInDown" data-wow-delay=".2s">
+                    Top-tier maintenance services and consulting </h2>
+                <p class="wow fadeInUp" data-wow-delay=".2s">Our commitment is your
+                    satisfaction: maintenance
+                    quality industrial,
+                    personalized and respect
+                    quality standards.</p>
+                <a th:classappend="${module == 'about' ? 'active' : ''}" th:href="@{/about}" class="btn wow fadeInUp" data-wow-delay=".4s">Discover more</a>
+            </div>
+        </div>
+
+        <!-- brand-area -->
+        <div class="brand-area">
+            <div class="container">
+                <div class="brand-inner">
+                    <div class="row brand-active">
+                        <div class="col-12">
+                            <div class="brand-item">
+                                <img src="assets/img/brand/brand_img01.png" alt="">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="brand-item">
+                                <img src="assets/img/brand/brand_img02.png" alt="">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="brand-item">
+                                <img src="assets/img/brand/brand_img03.png" alt="">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="brand-item">
+                                <img src="assets/img/brand/brand_img04.png" alt="">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="brand-item">
+                                <img src="assets/img/brand/brand_img05.png" alt="">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="brand-item">
+                                <img src="assets/img/brand/brand_img06.png" alt="">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="brand-item">
+                                <img src="assets/img/brand/brand_img03.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- brand-area-end -->
+
+    </section>
+    <!-- banner-area-end -->
+
+<!--    &lt;!&ndash; features-area &ndash;&gt;-->
+<!--    <section class="features-area pt-120 pb-90">-->
+<!--        <div class="container">-->
+<!--            <div class="row justify-content-center">-->
+<!--                <div class="col-lg-4 col-md-6">-->
+<!--                    <div class="features-item wow fadeInUp" data-wow-delay=".2s">-->
+<!--                        <div class="features-item-inner">-->
+<!--                            <div class="features-content">-->
+<!--                                <h4 class="title">Quality Materials</h4>-->
+<!--                                <p>There are many variatons of passag of Lorem Ipsum available, but the a jority have-->
+<!--                                    suffered.</p>-->
+<!--                                <a th:href="@{/services}" class="link-btn"><i class="fas fa-arrow-right"></i> Read-->
+<!--                                    More</a>-->
+<!--                            </div>-->
+<!--                            <div class="features-icon">-->
+<!--                                <img src="assets/img/icon/features_icon01.svg" alt="">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="col-lg-4 col-md-6">-->
+<!--                    <div class="features-item wow fadeInUp" data-wow-delay=".4s">-->
+<!--                        <div class="features-item-inner">-->
+<!--                            <div class="features-content">-->
+<!--                                <h4 class="title">Expert Engineer</h4>-->
+<!--                                <p>There are many variatons of passag of Lorem Ipsum available, but the a jority have-->
+<!--                                    suffered.</p>-->
+<!--                                <a href="services-details.html" class="link-btn"><i class="fas fa-arrow-right"></i> Read-->
+<!--                                    More</a>-->
+<!--                            </div>-->
+<!--                            <div class="features-icon">-->
+<!--                                <img src="assets/img/icon/features_icon02.svg" alt="">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="col-lg-4 col-md-6">-->
+<!--                    <div class="features-item wow fadeInUp" data-wow-delay=".6s">-->
+<!--                        <div class="features-item-inner">-->
+<!--                            <div class="features-content">-->
+<!--                                <h4 class="title">Quality Maintenance</h4>-->
+<!--                                <p>There are many variatons of passag of Lorem Ipsum available, but the a jority have-->
+<!--                                    suffered.</p>-->
+<!--                                <a href="services-details.html" class="link-btn"><i class="fas fa-arrow-right"></i> Read-->
+<!--                                    More</a>-->
+<!--                            </div>-->
+<!--                            <div class="features-icon">-->
+<!--                                <img src="assets/img/icon/features_icon03.svg" alt="">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </section>-->
+<!--    &lt;!&ndash; features-area-end &ndash;&gt;-->
+
+    <!-- services-area -->
+    <section class="services-area">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="section-title text-center mb-50 tg-heading-subheading animation-style3">
+                        <span class="sub-title tg-element-title">What We Do</span>
+                        <h2 class="title tg-element-title">Our Services Areas</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-6 col-sm-10">
+                    <div class="services-item wow fadeInUp" data-wow-delay=".2s"
+                         data-background="assets/img/services/services_item01.jpg">
+                        <div class="services-icon">
+                            <img src="assets/img/icon/services_icon01.png" alt="">
+                        </div>
+                        <div class="services-content">
+                            <h2 class="title"><a th:classappend="${module == 'detailservice' ? 'active' : ''}" th:href="@{/detailservice}" >Preventive Maintenance</a></h2>
+                            <h2 class="number">01</h2>
+                        </div>
+                        <div class="services-overlay-content">
+                            <h2 class="title"><a th:classappend="${module == 'detailservice' ? 'active' : ''}" th:href="@{/detailservice}" >Preventive Maintenance</a></h2>
+                            <p>Regular inspections and maintenance of equipment to avoid breakdowns and extend lifespan</p>
+                            <a th:classappend="${module == 'detailservice' ? 'active' : ''}" th:href="@{/detailservice}" class="read-more">Read More <i
+                                    class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+<!--                <div class="col-lg-4 col-md-6 col-sm-10">-->
+<!--                    <div class="services-item wow fadeInUp" data-wow-delay=".4s"-->
+<!--                         data-background="assets/img/services/services_item02.jpg">-->
+<!--                        <div class="services-icon">-->
+<!--                            <img src="assets/img/icon/services_icon02.png" alt="">-->
+<!--                        </div>-->
+<!--                        <div class="services-content">-->
+<!--                            <h2 class="title"><a th:classappend="${module == 'detailservice' ? 'active' : ''}" th:href="@{/detailservice}" >Emergency Repair</a></h2>-->
+<!--                            <h2 class="number">02</h2>-->
+<!--                        </div>-->
+<!--                        <div class="services-overlay-content">-->
+<!--                            <h2 class="title"><a th:classappend="${module == 'detailservice' ? 'active' : ''}" th:href="@{/detailservice}" >Emergency Repair</a></h2>-->
+<!--                            <p>Quick repairs in case of emergencies to minimize downtime and economic losses</p>-->
+<!--                            <a th:classappend="${module == 'detailservice' ? 'active' : ''}" th:href="@{/detailservice}"  class="read-more">Read More <i-->
+<!--                                    class="fas fa-arrow-right"></i></a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+                <div class="col-lg-4 col-md-6 col-sm-10">
+                    <div class="services-item wow fadeInUp" data-wow-delay=".6s"
+                         data-background="assets/img/services/services_item03.jpg">
+                        <div class="services-icon">
+                            <img src="assets/img/icon/services_icon03.png" alt="">
+                        </div>
+                        <div class="services-content">
+                            <h2 class="title"><a th:classappend="${module == 'detailservice' ? 'active' : ''}" th:href="@{/detailservice}" >Failure Analysis</a></h2>
+                            <h2 class="number">02</h2>
+                        </div>
+                        <div class="services-overlay-content">
+                            <h2 class="title"><a th:classappend="${module == 'detailservice' ? 'active' : ''}" th:href="@{/detailservice}" >Failure Analysis</a></h2>
+                            <p>Identifying root causes of problems and recommending corrective actions</p>
+                            <a th:classappend="${module == 'detailservice' ? 'active' : ''}" th:href="@{/detailservice}"  class="read-more">Read More <i
+                                    class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-10">
+                    <div class="services-item wow fadeInUp" data-wow-delay=".3s"
+                         data-background="assets/img/services/services_item04.jpg">
+                        <div class="services-icon">
+                            <img src="assets/img/icon/services_icon04.png" alt="">
+                        </div>
+                        <div class="services-content">
+                            <h2 class="title"><a th:classappend="${module == 'detailservice' ? 'active' : ''}" th:href="@{/detailservice}" >Corrective Maintenance</a></h2>
+                            <h2 class="number">03</h2>
+                        </div>
+                        <div class="services-overlay-content">
+                            <h2 class="title"><a th:classappend="${module == 'detailservice' ? 'active' : ''}" th:href="@{/detailservice}" >Corrective Maintenance</a></h2>
+                            <p>Repairing and replacing faulty or worn-out parts to ensure continuity of operation</p>
+                            <a th:classappend="${module == 'detailservice' ? 'active' : ''}" th:href="@{/detailservice}"  class="read-more">Read More <i
+                                    class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-10">
+                    <div class="services-item wow fadeInUp" data-wow-delay=".6s"
+                         data-background="assets/img/services/services_item05.jpg">
+                        <div class="services-icon">
+                            <img src="assets/img/icon/services_icon05.png" alt="">
+                        </div>
+                        <div class="services-content">
+                            <h2 class="title"><a th:classappend="${module == 'detailservice' ? 'active' : ''}" th:href="@{/detailservice}" >Equipment Modernization And Upgrading</a></h2>
+                            <h2 class="number">04</h2>
+                        </div>
+                        <div class="services-overlay-content">
+                            <h2 class="title"><a th:classappend="${module == 'detailservice' ? 'active' : ''}" th:href="@{/detailservice}" >Equipment Modernization And Upgrading</a></h2>
+                            <p>Helping businesses modernize their equipment to improve efficiency, safety, and lifespan</p>
+                            <a th:classappend="${module == 'detailservice' ? 'active' : ''}" th:href="@{/detailservice}"  class="read-more">Read More <i
+                                    class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-10">
+                    <div class="services-item wow fadeInUp" data-wow-delay=".9s"
+                         data-background="assets/img/services/services_item06.jpg">
+                        <div class="services-icon">
+                            <img src="assets/img/icon/services_icon06.png" alt="">
+                        </div>
+                        <div class="services-content">
+                            <h2 class="title"><a th:classappend="${module == 'detailservice' ? 'active' : ''}" th:href="@{/detailservice}" >Training and Technical Assistance</a></h2>
+                            <h2 class="number">05</h2>
+                        </div>
+                        <div class="services-overlay-content">
+                            <h2 class="title"><a th:classappend="${module == 'detailservice' ? 'active' : ''}" th:href="@{/detailservice}" >Training and Technical Assistance</a></h2>
+                            <p>Providing employee training to better understand and maintain equipment,
+                                as well as offering technical assistance as needed</p>
+                            <a th:classappend="${module == 'detailservice' ? 'active' : ''}" th:href="@{/detailservice}"  class="read-more">Read More <i
+                                    class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-10">
+                    <div class="services-item wow fadeInUp" data-wow-delay=".9s"
+                         data-background="assets/img/services/services_item07.jpg">
+                        <div class="services-icon">
+                            <img src="assets/img/icon/services_icon07.png" alt="">
+                        </div>
+                        <div class="services-content">
+                            <h2 class="title"><a th:classappend="${module == 'detailservice' ? 'active' : ''}" th:href="@{/detailservice}" >Installing, Commissioning and Start-up Assistance</a></h2>
+                            <h2 class="number">06</h2>
+                        </div>
+                        <div class="services-overlay-content">
+                            <h2 class="title"><a th:classappend="${module == 'detailservice' ? 'active' : ''}" th:href="@{/detailservice}" >Installing, Commissioning and Start-up Assistance</a></h2>
+                            <p>Providing employee training to better understand and maintain equipment,
+                                as well as offering technical assistance as needed</p>
+                            <a th:classappend="${module == 'detailservice' ? 'active' : ''}" th:href="@{/detailservice}"  class="read-more">Read More <i
+                                    class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-10">
+                    <div class="services-item wow fadeInUp" data-wow-delay=".9s"
+                         data-background="assets/img/services/services_item08.jpg">
+                        <div class="services-icon">
+                            <img src="assets/img/icon/services_icon08.png" alt="">
+                        </div>
+                        <div class="services-content">
+                            <h2 class="title"><a th:classappend="${module == 'detailservice' ? 'active' : ''}" th:href="@{/detailservice}" >Organization, Workflows and Procedures</a></h2>
+                            <h2 class="number">07</h2>
+                        </div>
+                        <div class="services-overlay-content">
+                            <h2 class="title"><a th:classappend="${module == 'detailservice' ? 'active' : ''}" th:href="@{/detailservice}" >Organization, Workflows and Procedures</a></h2>
+                            <p>Providing employee training to better understand and maintain equipment,
+                                as well as offering technical assistance as needed</p>
+                            <a th:classappend="${module == 'detailservice' ? 'active' : ''}" th:href="@{/detailservice}"  class="read-more">Read More <i
+                                    class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- services-area-end -->
+
+    <!-- about-area -->
+    <section class="about-area pb-120">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-xl-7 col-lg-6 order-0 order-lg-2">
+                    <div class="about-img-wrap">
+                        <img src="assets/img/images/about_img01.jpg" alt="" class="wow fadeInRight"
+                             data-wow-delay=".4s">
+                        <img src="assets/img/images/about_img02.jpg" alt="" class="wow fadeInRight"
+                             data-wow-delay=".2s">
+                        <div class="about-experiences-wrap">
+                            <div class="experiences-item">
+                                <div class="icon">
+                                    <img src="assets/img/icon/about_icon01.svg" alt="">
+                                </div>
+                                <div class="content">
+                                    <h6 class="title">We have more than 10 years of experiences</h6>
+                                </div>
+                            </div>
+                            <div class="experiences-item">
+                                <div class="icon">
+                                    <img src="assets/img/icon/about_icon02.svg" alt="">
+                                </div>
+                                <div class="content">
+                                    <h6 class="title">We use professional and experienced person</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-5 col-lg-6">
+                    <div class="about-content">
+                        <div class="section-title mb-25 tg-heading-subheading animation-style3">
+                            <span class="sub-title tg-element-title">About Our Company</span>
+                            <h2 class="title tg-element-title">We’re Committed to Maintenance Excellence</h2>
+                        </div>
+                        <p>Smart maint is a company specializing in industrial maintenance, which stands out
+                            for its technical expertise, quality of service and commitment to customer satisfaction.
+                            We offer custom solutions to meet each client's specific needs, working closely with them
+                            to understand their unique requirements. We adhere to the highest safety standards in
+                            everything we do, to ensure the safety of everyone involved in our operations.</p>
+                        <div class="about-list">
+                            <ul class="list-wrap">
+                                <li><i class="fas fa-check"></i>32k Partners have worked us.</li>
+                                <li><i class="fas fa-check"></i>Professional and experienced human resources.</li>
+                                <li><i class="fas fa-check"></i>Provide the best maintenance services</li>
+                            </ul>
+                        </div>
+                        <a th:href="@{/about}" class="btn">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- about-area-end -->
+
+
+
+
+    <!-- project-area -->
+<!--    <section class="project-area project-bg" data-background="assets/img/bg/project_bg.jpg">-->
+<!--        <div class="container">-->
+<!--            <div class="row align-items-end">-->
+<!--                <div class="col-lg-8">-->
+<!--                    <div class="section-title white-title mb-50 tg-heading-subheading animation-style3">-->
+<!--                        <span class="sub-title tg-element-title">Latest Projects</span>-->
+<!--                        <h2 class="title tg-element-title">Explore Our Latest Projects</h2>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="col-lg-4">-->
+<!--                    <div class="view-all-btn text-end mb-50">-->
+<!--                        <a href="project.html" class="btn">View All Projects</a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="row">-->
+<!--                <div class="col-lg-12">-->
+<!--                    <div class="project-item wow fadeInUp" data-wow-delay=".2s">-->
+<!--                        <div class="project-thumb">-->
+<!--                            <img src="assets/img/project/project_img01.jpg" alt="">-->
+<!--                        </div>-->
+<!--                        <div class="project-content">-->
+<!--                            <div class="left-side-content">-->
+<!--                                <span>Projects V1</span>-->
+<!--                                <h2 class="title"><a href="project-details.html">Title</a></h2>-->
+<!--                                <p>There are many variations of passages of Lorem Ipsum ava have suffered alteration in-->
+<!--                                    some form, by injected humour which don't look even slightly believable.</p>-->
+<!--                            </div>-->
+<!--                            <div class="project-link">-->
+<!--                                <a href="project-details.html"><i class="fas fa-arrow-right"></i></a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="project-item wow fadeInUp" data-wow-delay=".3s">-->
+<!--                        <div class="project-thumb">-->
+<!--                            <img src="assets/img/project/project_img02.jpg" alt="">-->
+<!--                        </div>-->
+<!--                        <div class="project-content">-->
+<!--                            <div class="left-side-content">-->
+<!--                                <span>Projects V2</span>-->
+<!--                                <h2 class="title"><a href="project-details.html">Title</a></h2>-->
+<!--                                <p>There are many variations of passages of Lorem Ipsum ava have suffered alteration in-->
+<!--                                    some form, by injected humour which don't look even slightly believable.</p>-->
+<!--                            </div>-->
+<!--                            <div class="project-link">-->
+<!--                                <a href="project-details.html"><i class="fas fa-arrow-right"></i></a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="project-item wow fadeInUp" data-wow-delay=".4s">-->
+<!--                        <div class="project-thumb">-->
+<!--                            <img src="assets/img/project/project_img03.jpg" alt="">-->
+<!--                        </div>-->
+<!--                        <div class="project-content">-->
+<!--                            <div class="left-side-content">-->
+<!--                                <span>Projects V3</span>-->
+<!--                                <h2 class="title"><a href="project-details.html">Title</a></h2>-->
+<!--                                <p>There are many variations of passages of Lorem Ipsum ava have suffered alteration in-->
+<!--                                    some form, by injected humour which don't look even slightly believable.</p>-->
+<!--                            </div>-->
+<!--                            <div class="project-link">-->
+<!--                                <a href="project-details.html"><i class="fas fa-arrow-right"></i></a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="project-item wow fadeInUp" data-wow-delay=".5s">-->
+<!--                        <div class="project-thumb">-->
+<!--                            <img src="assets/img/project/project_img04.jpg" alt="">-->
+<!--                        </div>-->
+<!--                        <div class="project-content">-->
+<!--                            <div class="left-side-content">-->
+<!--                                <span>Projects V3</span>-->
+<!--                                <h2 class="title"><a href="project-details.html">Title</a></h2>-->
+<!--                                <p>There are many variations of passages of Lorem Ipsum ava have suffered alteration in-->
+<!--                                    some form, by injected humour which don't look even slightly believable.</p>-->
+<!--                            </div>-->
+<!--                            <div class="project-link">-->
+<!--                                <a href="project-details.html"><i class="fas fa-arrow-right"></i></a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </section>-->
+    <!-- project-area-end -->
+
+<!--    &lt;!&ndash; team-area &ndash;&gt;-->
+<!--    <section class="team-area pt-115 pb-90">-->
+<!--        <div class="container">-->
+<!--            <div class="row justify-content-center">-->
+<!--                <div class="col-lg-8">-->
+<!--                    <div class="section-title text-center mb-60 tg-heading-subheading animation-style3">-->
+<!--                        <span class="sub-title tg-element-title">Professional Team</span>-->
+<!--                        <h2 class="title tg-element-title">Professional Team Member</h2>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="row justify-content-center">-->
+<!--                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-10">-->
+<!--                    <div class="team-item">-->
+<!--                        <div class="team-thumb">-->
+<!--                            <a href="team-details.html"><img src="assets/img/team/team_img01.jpg" alt=""></a>-->
+<!--                            <div class="team-social">-->
+<!--                                <ul class="list-wrap">-->
+<!--                                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>-->
+<!--                                    <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>-->
+<!--                                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>-->
+<!--                                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>-->
+<!--                                </ul>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="team-content">-->
+<!--                            <h2 class="title"><a href="team-details.html">Robert C. Simmons</a></h2>-->
+<!--                            <span>Maintenance Engineer</span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-10">-->
+<!--                    <div class="team-item">-->
+<!--                        <div class="team-thumb">-->
+<!--                            <a href="team-details.html"><img src="assets/img/team/team_img02.jpg" alt=""></a>-->
+<!--                            <div class="team-social">-->
+<!--                                <ul class="list-wrap">-->
+<!--                                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>-->
+<!--                                    <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>-->
+<!--                                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>-->
+<!--                                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>-->
+<!--                                </ul>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="team-content">-->
+<!--                            <h2 class="title"><a href="team-details.html">Christopher Jhon</a></h2>-->
+<!--                            <span>Maintenance Engineer</span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-10">-->
+<!--                    <div class="team-item">-->
+<!--                        <div class="team-thumb">-->
+<!--                            <a href="team-details.html"><img src="assets/img/team/team_img03.jpg" alt=""></a>-->
+<!--                            <div class="team-social">-->
+<!--                                <ul class="list-wrap">-->
+<!--                                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>-->
+<!--                                    <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>-->
+<!--                                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>-->
+<!--                                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>-->
+<!--                                </ul>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="team-content">-->
+<!--                            <h2 class="title"><a href="team-details.html">Karikoka Ahli</a></h2>-->
+<!--                            <span>Maintenance Engineer</span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-10">-->
+<!--                    <div class="team-item">-->
+<!--                        <div class="team-thumb">-->
+<!--                            <a href="team-details.html"><img src="assets/img/team/team_img04.jpg" alt=""></a>-->
+<!--                            <div class="team-social">-->
+<!--                                <ul class="list-wrap">-->
+<!--                                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>-->
+<!--                                    <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>-->
+<!--                                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>-->
+<!--                                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>-->
+<!--                                </ul>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="team-content">-->
+<!--                            <h2 class="title"><a href="team-details.html">Dickerson MH</a></h2>-->
+<!--                            <span>Maintenance Engineer</span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </section>-->
+<!--    &lt;!&ndash; team-area-end &ndash;&gt;-->
+
+    <!-- counter-area -->
+    <div class="counter-area pb-120">
+        <div class="container">
+            <div class="counter-inner wow fadeInUp" data-wow-delay=".2s">
+                <div class="row">
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="counter-item">
+                            <div class="counter-icon">
+                                <img src="assets/img/icon/counter_icon01.svg" alt="">
+                            </div>
+                            <div class="counter-content">
+                                <span class="count odometer" data-count="1500"></span>
+                                <p>Project Complete</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="counter-item">
+                            <div class="counter-icon">
+                                <img src="assets/img/icon/counter_icon02.svg" alt="">
+                            </div>
+                            <div class="counter-content">
+                                <span class="count odometer" data-count="8562"></span>
+                                <p>Satisfied Clients</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="counter-item">
+                            <div class="counter-icon">
+                                <img src="assets/img/icon/counter_icon03.svg" alt="">
+                            </div>
+                            <div class="counter-content">
+                                <span class="count odometer" data-count="450"></span>
+                                <p>Experienced Staff</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="counter-item">
+                            <div class="counter-icon">
+                                <img src="assets/img/icon/counter_icon04.svg" alt="">
+                            </div>
+                            <div class="counter-content">
+                                <span class="count odometer" data-count="38"></span>
+                                <p>Awards Win</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- counter-area-end -->
+
+    <!-- testimonial-area -->
+    <section class="testimonial-area pt-115 pb-120">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 wow fadeInLeft" data-wow-delay=".2s">
+                    <div class="testimonial-img">
+                        <img src="assets/img/images/testimonial_img.jpg" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="testimonial-content">
+                        <div class="section-title mb-45 tg-heading-subheading animation-style3">
+                            <span class="sub-title tg-element-title">Our Testimonial</span>
+                            <h2 class="title tg-element-title">Some of Our Respected Happy Clients Says</h2>
+                        </div>
+                        <div class="testimonial-active">
+                            <div class="testimonial-item">
+                                <div class="testimonial-icon">
+                                    <i class="fas fa-quote-left"></i>
+                                </div>
+                                <div class="testimonial-content">
+                                    <p>There are many varation of paissages of Lorem as the Ipum available but our
+                                        majority have sufferied alterations in some form, by our by injected hsumour
+                                        randomised worids which don't look even slightly there as believable. If you
+                                        going to use a passage of Lorem Ipsum.</p>
+                                </div>
+                                <div class="testimonial-avatar">
+                                    <div class="avatar-thumb">
+                                        <img src="assets/img/images/testi_avatar01.png" alt="">
+                                    </div>
+                                    <div class="avatar-content">
+                                        <h6 class="title">Darrell Steward</h6>
+                                        <p>RMaintenance Expert</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="testimonial-item">
+                                <div class="testimonial-icon">
+                                    <i class="fas fa-quote-left"></i>
+                                </div>
+                                <div class="testimonial-content">
+                                    <p>There are many varation of paissages of Lorem as the Ipum available but our
+                                        majority have sufferied alterations in some form, by our by injected hsumour
+                                        randomised worids which don't looks even slightly there as believable. If you
+                                        going to use a passage of Lorem Ipsum.</p>
+                                </div>
+                                <div class="testimonial-avatar">
+                                    <div class="avatar-thumb">
+                                        <img src="assets/img/images/testi_avatar01.png" alt="">
+                                    </div>
+                                    <div class="avatar-content">
+                                        <h6 class="title">Darrell Steward</h6>
+                                        <p>Maintenance Expert</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="testimonial-item">
+                                <div class="testimonial-icon">
+                                    <i class="fas fa-quote-left"></i>
+                                </div>
+                                <div class="testimonial-content">
+                                    <p>There are many varation of paissages of Lorem as the Ipum available but our
+                                        majority have sufferied alterations in some form, by our by injected hsumour
+                                        randomised worids which don't looks even slightly there as believable. If you
+                                        going to use a passage of Lorem Ipsum.</p>
+                                </div>
+                                <div class="testimonial-avatar">
+                                    <div class="avatar-thumb">
+                                        <img src="assets/img/images/testi_avatar01.png" alt="">
+                                    </div>
+                                    <div class="avatar-content">
+                                        <h6 class="title">Darrell Steward</h6>
+                                        <p>Maintanance Expert</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- testimonial-area-end -->
+
+    <!-- blog-area -->
+    <section class="blog-area pt-115 pb-90">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="section-title text-center mb-60 tg-heading-subheading animation-style3">
+                        <span class="sub-title tg-element-title">Our News</span>
+                        <h2 class="title tg-element-title">Read Our Latest News & Blog</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-xl-4 col-md-6">
+                    <div class="blog-post-item">
+                        <div class="blog-post-thumb">
+                            <a href="blog-details.html"><img src="assets/img/blog/blog_img01.jpg" alt=""></a>
+                        </div>
+                        <div class="blog-post-content">
+                            <a href="blog.html" class="tag">Quality Materials</a>
+                            <div class="blog-meta">
+                                <ul class="list-wrap">
+                                    <li><i class="far fa-user"></i> By <a href="blog-details.html">Admin</a></li>
+                                    <li><i class="fas fa-calendar-alt"></i>23 Dec 2022</li>
+                                </ul>
+                            </div>
+                            <h2 class="title"><a href="blog-details.html">Building worker help each other with at
+                                construction site</a></h2>
+                            <a href="blog-details.html" class="link-btn">Read More<i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-6">
+                    <div class="blog-post-item">
+                        <div class="blog-post-thumb">
+                            <a href="blog-details.html"><img src="assets/img/blog/blog_img02.jpg" alt=""></a>
+                        </div>
+                        <div class="blog-post-content">
+                            <a href="blog.html" class="tag">Title</a>
+                            <div class="blog-meta">
+                                <ul class="list-wrap">
+                                    <li><i class="far fa-user"></i> By <a href="blog-details.html">Admin</a></li>
+                                    <li><i class="fas fa-calendar-alt"></i>23 Dec 2022</li>
+                                </ul>
+                            </div>
+                            <h2 class="title"><a href="blog-details.html">Full shot maintenance agents working together
+                                with helmets</a></h2>
+                            <a href="blog-details.html" class="link-btn">Read More<i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-6">
+                    <div class="blog-post-item">
+                        <div class="blog-post-thumb">
+                            <a href="blog-details.html"><img src="assets/img/blog/blog_img03.jpg" alt=""></a>
+                        </div>
+                        <div class="blog-post-content">
+                            <a href="blog.html" class="tag">Construction Engineer</a>
+                            <div class="blog-meta">
+                                <ul class="list-wrap">
+                                    <li><i class="far fa-user"></i> By <a href="blog-details.html">Admin</a></li>
+                                    <li><i class="fas fa-calendar-alt"></i>23 Dec 2022</li>
+                                </ul>
+                            </div>
+                            <h2 class="title"><a href="blog-details.html">Hard hatswork at the heavy manufacturing
+                                factory industrial</a></h2>
+                            <a href="blog-details.html" class="link-btn">Read More<i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- blog-area-end -->
+
+
+</main>
+<!-- mian-area-end -->
+
+<!-- footer-area -->
+<div th:replace="~{footer :: footer}"></div>
+<!-- footer-area-end -->
+
+
+<!-- JS here -->
+<script th:src="@{/assets/js/vendor/jquery-3.6.0.min.js}"></script>
+<script th:src="@{/assets/js/bootstrap.min.js}"></script>
+<script th:src="@{/assets/js/imagesloaded.pkgd.min.js}"></script>
+<script th:src="@{/assets/js/jquery.magnific-popup.min.js}"></script>
+<script th:src="@{/assets/js/jquery.odometer.min.js}"></script>
+<script th:src="@{/assets/js/jquery.appear.js}"></script>
+<script th:src="@{/assets/js/slick.min.js}"></script>
+<script th:src="@{/assets/js/slick-animation.min.js}"></script>
+<script th:src="@{/assets/js/ajax-form.js}"></script>
+<script th:src="@{/assets/js/jarallax.min.js}"></script>
+<script th:src="@{/assets/js/parallax.min.js}"></script>
+<script th:src="@{/assets/js/gsap.js}"></script>
+<script th:src="@{/assets/js/ScrollTrigger.js}"></script>
+<script th:src="@{/assets/js/SplitText.js}"></script>
+<script th:src="@{/assets/js/gsap-animation.js}"></script>
+<script th:src="@{/assets/js/tg-cursor.min.js}"></script>
+<script th:src="@{/assets/js/wow.min.js}"></script>
+<script th:src="@{/assets/js/main.js}"></script>
+</body>
+</html>

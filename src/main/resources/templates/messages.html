@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+    <title>Smart maint</title>
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="robots" content="">
+
+    <!-- Open Graph Meta -->
+    <meta property="og:title" content="">
+    <meta property="og:site_name" content="">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/assets/img/favicon.png}">
+
+
+    <!-- Stylesheets -->
+
+    <link rel="stylesheet" id="css-main" th:href="@{/assets/admincss/dashmix.min.css}">
+    <!-- END Stylesheets -->
+</head>
+<body>
+<div id="page-container" class="sidebar-o sidebar-dark enable-page-overlay side-scroll page-header-fixed main-content-narrow">
+    <!-- Side Overlay-->
+    <div th:insert="side-overlay.html"></div>
+    <!-- END Side Overlay -->
+
+    <!-- Sidebar -->
+    <div th:insert="sidebar.html"></div>
+    <!-- END Sidebar -->
+
+    <!-- Header -->
+    <div th:insert="headerAdmin.html"></div>
+    <!-- END Header -->
+
+    <!-- Main Container -->
+    <main id="main-container">
+        <!-- Page Content -->
+        <div class="row no-gutters flex-lg-10-auto">
+            <div class="col-lg-5 col-xl-3 h100-scroll">
+                <div class="content">
+                    <!-- Toggle Side Content -->
+                    <div class="row gutters-tiny d-lg-none push">
+                        <div class="col-12 text-center mb-4">
+                            <!-- Logo -->
+                            <a class="font-size-lg font-w600 tracking-wide text-dark">
+                                <span class="font-w400">Messages</span>
+                            </a>
+                            <!-- END Logo -->
+                        </div>
+                        <div class="col-6">
+                            <!-- Toggle Sidebar -->
+                            <!-- Layout API, functionality initialized in Template._uiApiLayout()-->
+                            <button type="button" class="btn btn-primary btn-block" data-toggle="layout"
+                                    data-action="sidebar_toggle">
+                                <i class="fa fa-bars opacity-50 mr-1"></i> Menu
+                            </button>
+                        </div>
+                        <div class="col-6">
+                            <!-- Class Toggle, functionality initialized in Helpers.coreToggleClass() -->
+                            <button type="button" class="btn btn-alt-primary btn-block" data-toggle="class-toggle"
+                                    data-target="#side-content" data-class="d-none">
+                                <i class="fa fa-envelope opacity-50 mr-1"></i> Messages
+                            </button>
+                        </div>
+                    </div>
+                    <!-- END Toggle Side Content -->
+
+                    <!-- Side Content -->
+                    <div id="side-content" class="d-none d-lg-block push">
+                        <!-- Search Messages -->
+                        <form th:action="@{/messages/{sort}/{id}(sort= ${sort}, id=${contact != null ? contact.id_message : 'all'})}" method="GET">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="text" name="search" class="form-control border-0" placeholder="Search Messages.." th:value="${searchTerm}">
+                                    <div class="input-group-append">
+                <span class="input-group-text border-0 bg-white">
+                    <i class="fa fa-fw fa-search"></i>
+                </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- END Search Messages -->
+
+                        <!-- Sorting/Filtering -->
+                        <div class="d-flex justify-content-between mb-2">
+                            <div class="dropdown">
+                                <button type="button" class="btn btn-sm btn-link font-w600 dropdown-toggle" id="inbox-msg-sort"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Sort by
+                                </button>
+                                <div class="dropdown-menu font-size-sm" aria-labelledby="inbox-msg-sort">
+                                    <a class="dropdown-item" th:href="@{/messages/{sort}/{id}(sort='newest', id=${contact != null ? contact.id_message : 'all'}, search=${searchTerm != null ? searchTerm : ''})}"
+                                    >
+                                        <i class="fa fa-fw fa-sort-amount-down mr-1"></i> Newest
+                                    </a>
+                                    <a class="dropdown-item" th:href="@{/messages/{sort}/{id}(sort='oldest', id=${contact != null ? contact.id_message : 'all'}, search=${searchTerm != null ? searchTerm : ''})}"
+                                    >
+                                        <i class="fa fa-fw fa-sort-amount-up mr-1"></i> Oldest
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END Sorting/Filtering -->
+
+                        <!-- Messages -->
+                        <div class="list-group font-size-sm" th:each="contact : ${contacts}">
+                            <a class="list-group-item list-group-item-action" th:href="@{/messages/{sort}/{id}(sort=${sort}, id=${contact.id_message}, search=${searchTerm})}">
+                                <span class="badge badge-pill badge-primary m-1" th:if="${!contact.read}">!</span>
+                                <p class="font-size-h6 font-w700 mb-0" th:text="${contact.subject}">
+                                    <!-- Error with modal -->
+                                </p>
+                                <p class="text-muted mb-2"
+                                   th:text="${#strings.length(contact.message) > 30 ? #strings.substring(contact.message, 0, 50) + '...' : contact.message}">
+                                    <!-- This will display only the first 50 characters of the message followed by '...' if the message length is more than 50 -->
+                                </p>
+                                <p class="font-size-sm text-muted mb-0">
+                                    <strong th:text="${contact.firstName + ' ' + contact.lastName}"></strong>,
+                                    <span th:text="${#dates.format(contact.dateSent, 'dd MMM yyyy')}"></span>
+                                </p>
+                            </a>
+                            <a class="btn btn-sm btn-light" th:href="@{/messages/{sort}/{id}(sort=${sort}, id='all', search=${searchTerm}, delId=${contact.id_message})}" onclick="return confirm('Are-you sure you want to delete this message ?')">
+                                <i class="fa fa-fw fa-times text-danger" title="delete"></i>
+                            </a>
+                        </div>
+                        <!-- END Messages -->
+
+                    </div>
+                    <!-- END Side Content -->
+                </div>
+            </div>
+            <div class="col-lg-7 col-xl-9 h100-scroll bg-body-dark">
+                <!-- Main Content -->
+                <div>
+                    <div class="content" th:if="${contact != null}">
+                        <!-- Message -->
+                        <div class="block block-rounded">
+                            <div class="block-content block-content-sm block-content-full bg-body-light">
+                                <div class="media py-3">
+                                    <div class="mr-3 ml-2 overlay-container overlay-right">
+                                        <img class="img-avatar img-avatar48"
+                                             th:src="@{/assets/media/avatars/avatar4.jpg}" alt="">
+                                        <i class="far fa-circle text-white overlay-item font-size-sm bg-success rounded-circle"></i>
+                                    </div>
+                                    <div class="media-body">
+                                        <div class="row">
+                                            <div class="col-sm-7">
+                                                <a class="font-w600 link-fx"
+                                                   th:text="${contact.firstName + ' ' + contact.lastName}"
+                                                   href="javascript:void(0)"></a>
+                                                <div class="font-size-sm text-muted" th:text="${contact.email}"></div>
+                                                <div class="font-size-sm text-muted" th:text="${contact.phoneNumber}"></div>
+                                                <div class="font-size-sm text-muted" th:text="${contact.subject}"></div>
+                                            </div>
+                                            <div class="col-sm-5 d-sm-flex align-items-sm-center">
+                                                <div class="font-size-sm font-italic text-muted text-sm-right w-100 mt-2 mt-sm-0">
+                                                    <p class="mb-0"
+                                                       th:text="${#dates.format(contact.dateSent, 'MMMM d, yyyy')}"></p>
+                                                    <p class="mb-0"
+                                                       th:text="${#dates.format(contact.dateSent, 'hh:mm')}"></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="block-content">
+                                <p th:text="${contact.message}"></p>
+                            </div>
+                            <!-- END Message -->
+                        </div>
+                    </div>
+                </div>
+                <!-- END Message -->
+
+            </div>
+            <!-- END Main Content -->
+        </div>
+
+        <!-- END Page Content -->
+
+    </main>
+
+    <!-- END Main Container -->
+</div>
+<!-- END Page Container -->
+
+
+<script th:src="@{/assets/adminjs/dashmix.core.min.js}"></script>
+
+
+<script th:src="@{/assets/adminjs/dashmix.app.min.js}"></script>
+
+<!-- Page JS Plugins -->
+<script th:src="@{/assets/adminjs/plugins/summernote/summernote-bs4.min.js}"></script>
+
+<!-- Page JS Helpers (Summernote plugin) -->
+<script>jQuery(function(){Dashmix.helpers('summernote');});</script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!doctype html>
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Smart Maint</title>
+    <meta name="description" content="Smart Maint">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/assets/img/favicon.png}">
+
+    <!-- CSS here -->
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/animate.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/magnific-popup.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/fontawesome-all.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/odometer.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/slick.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/tg-cursor.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/default.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/jarallax.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/style.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/responsive.css}">
+
+</head>
+<body>
+<header>
+    <div id="sticky-header"
+         th:class="${currentURI != null and #strings.startsWith(currentURI, '/home') ? 'menu-area transparent-header' : 'menu-area menu-area-three'}">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="mobile-nav-toggler"><i class="fas fa-bars"></i></div>
+                    <div class="menu-wrap">
+                        <nav class="menu-nav">
+                            <div class="logo different-logo">
+                                <a th:href="@{/home}"><img th:src="@{/assets/img/logo/logo.png}" alt="Logo"></a>
+                            </div>
+                            <div class="logo d-none">
+                                <a th:href="@{/home}"><img th:src="@{/assets/img/logo/logo.png}" alt="Logo"></a>
+                            </div>
+                            <div class="navbar-wrap main-menu d-none d-lg-flex">
+                                <ul class="navigation">
+                                    <li th:class="${currentURI != null and #strings.startsWith(currentURI, '/home') ? 'active' : ''}">
+                                        <a th:href="@{/home}">Home</a></li>
+                                    <li th:class="${currentURI != null and #strings.startsWith(currentURI, '/services') ? 'active' : ''}">
+                                        <a th:href="@{/services}">Services</a></li>
+                                    <li th:class="${currentURI != null and #strings.startsWith(currentURI, '/blogs') ? 'active' : ''}">
+                                        <a th:href="@{/blogs}">Blogs</a></li>
+                                    <li th:class="${currentURI != null and #strings.startsWith(currentURI, '/contact') ? 'active' : ''}">
+                                        <a th:href="@{/contact}">Contact</a></li>
+                                    <li th:class="${currentURI != null and #strings.startsWith(currentURI, '/about') ? 'active' : ''}">
+                                        <a th:href="@{/about}">About us</a></li>
+                                    <li th:class="${currentURI != null and #strings.startsWith(currentURI, '/courses') ? 'active' : ''}"
+                                        sec:authorize="isAuthenticated()"><a th:href="@{/courses}">Courses</a></li>
+                                    <li th:class="${currentURI != null and #strings.startsWith(currentURI, '/dashboard') ? 'active' : ''}"
+                                        sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/dashboard}">Dashboard</a>
+                                    </li>
+
+<!--                                    <li>-->
+<!--                                        <a sec:authorize="!isAuthenticated()" th:href="@{/login}" class="header-log-reg" style="display: inline-block;color: #fff;background-color: orange;border-radius: 5px;padding: 8px 16px;line-height: 50px;vertical-align: middle;">Login</a>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <a sec:authorize="!isAuthenticated()" th:href="@{/register}" class="header-log-reg" style="display: inline-block;color: #fff;background-color: orange;border-radius: 5px;padding: 8px 16px;line-height: 50px;vertical-align: middle;">Register</a>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <a sec:authorize="!isAuthenticated()" th:href="@{/register}" class="header-log-reg" style="display: inline-block;color: #fff;background-color: orange;border-radius: 5px;padding: 8px 16px;line-height: 50px;vertical-align: middle;">Register</a>-->
+<!--                                    </li>-->
+                                </ul>
+                            </div>
+                            <div sec:authorize="!isAuthenticated()" class="header-action d-md-block">
+                                <ul class="list-wrap">
+                                    <li class="header-btn" style="margin-right: 40px; "><a th:href="@{/login}" class="btn">Log In</a></li>
+                                </ul>
+                            </div>
+
+                            <div sec:authorize="isAuthenticated()" class="header-action d-md-block" >
+                                <ul class="list-wrap" >
+                                    <li class="header-btn" style="margin-left: -23px;"><a th:href="@{/logout}" class="btn">Log Out</a></li>
+                                </ul>
+                            </div>
+
+<!--                            <div sec:authorize="!isAuthenticated()" class="header-action d-md-block">-->
+<!--                                <ul class="list-wrap">-->
+<!--                                    <li class="header-btn"><a th:href="@{/register}" class="btn">Register</a></li>-->
+<!--                                </ul>-->
+<!--                            </div>-->
+
+
+
+                            <div sec:authorize="isAuthenticated()" th:if="${currentURI != null and #strings.startsWith(currentURI, '/home')}" style="position: absolute; top: 100px; right: 20px;">
+                                    <p>
+                                        Welcome <span th:text="${firstName}" style="color: blue;">Prénom</span> <span
+                                            th:text="${lastName}" style="color: blue;">Nom</span></p>
+                            </div>
+
+
+                        </nav>
+                    </div>
+
+                    <!-- Mobile Menu  -->
+                    <div class="mobile-menu">
+                        <nav class="menu-box">
+                            <div class="close-btn"><i class="fas fa-times"></i></div>
+                            <div class="nav-logo">
+                                <a th:href="@{/home}"><img src="assets/img/logo/logo_02.png" alt="Logo"></a>
+                            </div>
+                            <div class="menu-outer">
+                                <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
+                            </div>
+                            <div class="social-links">
+                                <ul class="clearfix list-wrap">
+                                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="menu-backdrop"></div>
+                    <!-- End Mobile Menu -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- JS here -->
+<script th:src="@{/assets/js/vendor/jquery-3.6.0.min.js}"></script>
+<script th:src="@{/assets/js/bootstrap.min.js}"></script>
+<script th:src="@{/assets/js/imagesloaded.pkgd.min.js}"></script>
+<script th:src="@{/assets/js/jquery.magnific-popup.min.js}"></script>
+<script th:src="@{/assets/js/jquery.odometer.min.js}"></script>
+<script th:src="@{/assets/js/jquery.appear.js}"></script>
+<script th:src="@{/assets/js/slick.min.js}"></script>
+<script th:src="@{/assets/js/slick-animation.min.js}"></script>
+<script th:src="@{/assets/js/ajax-form.js}"></script>
+<script th:src="@{/assets/js/jarallax.min.js}"></script>
+<script th:src="@{/assets/js/parallax.min.js}"></script>
+<script th:src="@{/assets/js/gsap.js}"></script>
+<script th:src="@{/assets/js/ScrollTrigger.js}"></script>
+<script th:src="@{/assets/js/SplitText.js}"></script>
+<script th:src="@{/assets/js/gsap-animation.js}"></script>
+<script th:src="@{/assets/js/tg-cursor.min.js}"></script>
+<script th:src="@{/assets/js/wow.min.js}"></script>
+<script th:src="@{/assets/js/main.js}"></script>
+</body>
+</html>

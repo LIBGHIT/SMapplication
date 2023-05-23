@@ -1,0 +1,221 @@
+<!doctype html>
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Smart Maint</title>
+  <meta name="description" content="Smart Maint">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" type="image/x-icon" th:href="@{/assets/img/favicon.png}">
+
+  <!-- CSS here -->
+  <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
+  <link rel="stylesheet" th:href="@{/assets/css/animate.min.css}">
+  <link rel="stylesheet" th:href="@{/assets/css/magnific-popup.css}">
+  <link rel="stylesheet" th:href="@{/assets/css/fontawesome-all.min.css}">
+  <link rel="stylesheet" th:href="@{/assets/css/odometer.css}">
+  <link rel="stylesheet" th:href="@{/assets/css/slick.css}">
+  <link rel="stylesheet" th:href="@{/assets/css/tg-cursor.css}">
+  <link rel="stylesheet" th:href="@{/assets/css/default.css}">
+  <link rel="stylesheet" th:href="@{/assets/css/jarallax.css}">
+  <link rel="stylesheet" th:href="@{/assets/css/style.css}">
+  <link rel="stylesheet" th:href="@{/assets/css/responsive.css}">
+</head>
+<body>
+
+<!-- Preloader-start -->
+<div id="preloader">
+  <div class="ta-preloader-block">
+    <div class="ta-spinner-eff">
+      <div class="ta-bar ta-bar-top"></div>
+      <div class="ta-bar ta-bar-right"></div>
+      <div class="ta-bar ta-bar-bottom"></div>
+      <div class="ta-bar ta-bar-left"></div>
+    </div>
+  </div>
+</div>
+<!-- Preloader-start-end -->
+
+
+<!-- Scroll-top -->
+<button class="scroll-top scroll-to-target" data-target="html">
+  <i class="fas fa-level-up-alt"></i>
+</button>
+<!-- Scroll-top-end-->
+
+<!-- header-area -->
+<div th:replace="~{header :: header}"></div>
+<!-- header-area-end -->
+
+
+<!-- main-area -->
+<main>
+
+  <!-- breadcrumb-area -->
+  <section class="breadcrumb-area breadcrumb-bg" th:data-background="@{/assets/img/bg/breadcrumb_bg.jpg}">
+    <div class="breadcrumb-shape" th:data-background="@{/assets/img/images/breadcrumb_shape.png}"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="breadcrumb-content">
+            <h2 class="title">Blog Details</h2>
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Blog Details</li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- breadcrumb-area-end -->
+
+  <!-- blog-details-area -->
+  <section class="blog-details-area pt-120 pb-120">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-xl-8">
+          <div class="blog-details-wrap">
+            <div class="blog-details-thumb">
+              <img th:if="${blog.imageId != null and blog.imageId != ''}" th:src="@{/files/{id}(id=${blog.imageId})}" alt="Blog Image">
+            </div>
+            <div class="blog-details-content">
+              <div class="blog-meta">
+                <ul class="list-wrap">
+                  <li><i class="far fa-user"         style="color: orangered"></i> By <a href="#">Admin</a></li>
+                  <i class="fas fa-calendar-alt" style="color: orangered ; margin-right: -15px;" ></i><span th:text="${#dates.format(blog.date, 'dd MMM yyyy')}"></span></li>
+                  <li><i class="far fa-comments"     style="color: orangered"></i><span th:text="${#lists.size(comment)}"></span></li>
+                  <li><i class="far fa-thumbs-up" style="color: orangered"></i><span th:text="${#lists.size(comment)}"></span></li>
+                  <li><i class="fas fa-share-square" style="color: orangered"></i><span th:text="${#lists.size(comment)}"></span></li>
+                </ul>
+              </div>
+              <h2 class="title"  th:text="${blog.title}"></h2>
+              <div th:utext="${blog.body}" style=" word-wrap: break-word;"></div>
+
+            </div>
+            <div class="comments-wrap">
+              <h4 class="comments-wrap-title">Comments (<span th:text="${#lists.size(comment)}"></span>)</h4>
+              <div class="latest-comments">
+                <ul class="list-wrap">
+                  <li th:each="comment : ${comment}">
+                    <div class="comments-box">
+                      <div class="comments-avatar">
+                        <img src="assets/img/blog/comment_avatar01.png" alt="">
+                      </div>
+                      <div class="comments-text">
+                        <div class="avatar-name">
+                          <h6 class="name">
+                            <span th:text="${comment.firstName}"></span><span th:text="${comment.lastName}" style="margin-right: 14px;"></span>
+<!--                            <a href="#comment-form" class="comment-reply-link" th:data-comment-id="${comment.id}" style="margin-left: 190px;"><i class="fas fa-reply"></i>Reply</a>-->
+                          </h6>
+                          <span class="date" th:text="${#dates.format(comment.date, 'MMMM dd, yyyy   , HH:mm')}"></span>
+                        </div>
+                        <p th:text="${comment.text}"></p>
+                        <!-- Ajoutez ce code sous le texte du commentaire -->
+<!--                        <div th:if="${comment.userId == userId}">-->
+<!--                          <a th:href="@{/deleteComment/{id}(id=${comment.id})}" class="comment-reply-link"><i class="fas fa-trash"></i>Supprimer</a>-->
+<!--                        </div>-->
+
+                      </div>
+                    </div>
+<!--                    <ul class="list-wrap children" th:each="reply : ${comment.replies}" th:if="${reply.parentCommentId == comment.id}">-->
+<!--                      <li>-->
+<!--                        <div class="comments-box">-->
+<!--                          <div class="comments-avatar">-->
+<!--                            <img src="assets/img/blog/comment_avatar02.png" alt="">-->
+<!--                          </div>-->
+<!--                          <div class="comments-text">-->
+<!--                            <div class="avatar-name">-->
+<!--                              <h6 class="name">-->
+<!--                                <span th:text="${reply.userId}"></span>-->
+<!--                                <a href="#comment-form" class="comment-reply-link"><i class="fas fa-reply"></i>Reply</a>-->
+<!--                              </h6>-->
+<!--                              <span class="date" th:text="${#dates.format(reply.date, 'MMMM dd, yyyy')}"></span>-->
+<!--                            </div>-->
+<!--                            <p th:text="${reply.text}"></p>-->
+<!--                          </div>-->
+<!--                        </div>-->
+<!--                      </li>-->
+<!--                    </ul>-->
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="comment-respond" id="comment-form">
+              <h3 class="comment-reply-title">Write Your Comment</h3>
+              <form class="comment-form" th:action="@{/comments/addComment}" method="post">
+                <div class="form-grp">
+                  <textarea style="width: 66%;" placeholder="Comment *" name="text"></textarea>
+                </div>
+                <input type="hidden" th:name="blogId" th:value="${blog.id_blog}" />
+                <button type="submit" class="btn btn-two">Post Comment</button>
+              </form>
+            </div>
+
+
+
+          </div>
+        </div>
+        <div class="col-xl-4 col-lg-6 col-md-10">
+          <aside class="blog-sidebar">
+            <div class="blog-widget">
+              <div class="sidebar-search">
+                <h4 class="widget-title">Search</h4>
+                <form action="#">
+                  <input id="search" type="text" placeholder="Search">
+                  <button type="submit"><i class="fas fa-search"></i></button>
+                </form>
+              </div>
+            </div>
+            <div class="blog-widget">
+              <h4 class="widget-title">Categories</h4>
+              <div class="categories-list">
+                <ul class="list-wrap">
+                  <li th:each="subject : ${subjects}">
+                    <a href="#" th:text="${subject.subject} + ' (' + ${subject.count} + ')'"></a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+          </aside>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- blog-details-area-end -->
+
+</main>
+<!-- mian-area-end -->
+
+
+
+<!-- footer-area -->
+<div th:replace="~{footer :: footer}"></div>
+<!-- footer-area-end -->
+
+<!-- JS here -->
+<script th:src="@{/assets/js/vendor/jquery-3.6.0.min.js}"></script>
+<script th:src="@{/assets/js/bootstrap.min.js}"></script>
+<script th:src="@{/assets/js/imagesloaded.pkgd.min.js}"></script>
+<script th:src="@{/assets/js/jquery.magnific-popup.min.js}"></script>
+<script th:src="@{/assets/js/jquery.odometer.min.js}"></script>
+<script th:src="@{/assets/js/jquery.appear.js}"></script>
+<script th:src="@{/assets/js/slick.min.js}"></script>
+<script th:src="@{/assets/js/slick-animation.min.js}"></script>
+<script th:src="@{/assets/js/ajax-form.js}"></script>
+<script th:src="@{/assets/js/jarallax.min.js}"></script>
+<script th:src="@{/assets/js/parallax.min.js}"></script>
+<script th:src="@{/assets/js/gsap.js}"></script>
+<script th:src="@{/assets/js/ScrollTrigger.js}"></script>
+<script th:src="@{/assets/js/SplitText.js}"></script>
+<script th:src="@{/assets/js/gsap-animation.js}"></script>
+<script th:src="@{/assets/js/tg-cursor.min.js}"></script>
+<script th:src="@{/assets/js/wow.min.js}"></script>
+<script th:src="@{/assets/js/main.js}"></script>
+</body>
+</html>

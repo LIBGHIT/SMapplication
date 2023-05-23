@@ -1,0 +1,120 @@
+<!doctype html>
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Smart Maint</title>
+    <meta name="description" content="Roofx - Roofing Services HTML Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/assets/img/favicon.png}">
+    <!-- Place favicon.ico in the root directory -->
+
+    <!-- CSS here -->
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/animate.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/magnific-popup.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/fontawesome-all.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/odometer.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/slick.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/tg-cursor.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/default.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/jarallax.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/style.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/responsive.css}">
+</head>
+<body>
+
+<!-- Preloader-start -->
+<div id="preloader">
+    <div class="ta-preloader-block">
+        <div class="ta-spinner-eff">
+            <div class="ta-bar ta-bar-top"></div>
+            <div class="ta-bar ta-bar-right"></div>
+            <div class="ta-bar ta-bar-bottom"></div>
+            <div class="ta-bar ta-bar-left"></div>
+        </div>
+    </div>
+</div>
+<!-- Preloader-start-end -->
+
+<!-- Scroll-top -->
+<button class="scroll-top scroll-to-target" data-target="html">
+    <i class="fas fa-level-up-alt"></i>
+</button>
+<!-- Scroll-top-end-->
+
+<!-- header-area -->
+<div th:replace="~{header :: header}"></div>
+<!-- header-area-end -->
+
+
+<!-- main-area -->
+<main>
+
+    <!-- breadcrumb-area -->
+    <section class="breadcrumb-area breadcrumb-bg" th:data-background="@{/assets/img/bg/breadcrumb_bg.jpg}">
+        <div class="breadcrumb-shape" th:data-background="@{/assets/img/images/breadcrumb_shape.png}"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-content">
+                        <h2 class="title">Validation</h2>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a th:href="@{/home}">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Validation</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- breadcrumb-area-end -->
+
+    <!-- services-area -->
+    <section class="services-area">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="section-title text-center mb-50 tg-heading-subheading animation-style3">
+                        <span class="sub-title tg-element-title">Validate your email please</span>
+                        <h2 class="title tg-element-title">Please follow the link we have sent you to your email to
+                            validate your account</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- services-area-end -->
+
+</main>
+<!-- mian-area-end -->
+
+<!-- footer-area -->
+<div th:replace="~{footer :: footer}"></div>
+<!-- footer-area-end -->
+
+
+<!-- JS here -->
+<script th:src="@{/assets/js/vendor/jquery-3.6.0.min.js}"></script>
+<script th:src="@{/assets/js/bootstrap.min.js}"></script>
+<script th:src="@{/assets/js/imagesloaded.pkgd.min.js}"></script>
+<script th:src="@{/assets/js/jquery.magnific-popup.min.js}"></script>
+<script th:src="@{/assets/js/jquery.odometer.min.js}"></script>
+<script th:src="@{/assets/js/jquery.appear.js}"></script>
+<script th:src="@{/assets/js/slick.min.js}"></script>
+<script th:src="@{/assets/js/slick-animation.min.js}"></script>
+<script th:src="@{/assets/js/ajax-form.js}"></script>
+<script th:src="@{/assets/js/jarallax.min.js}"></script>
+<script th:src="@{/assets/js/parallax.min.js}"></script>
+<script th:src="@{/assets/js/gsap.js}"></script>
+<script th:src="@{/assets/js/ScrollTrigger.js}"></script>
+<script th:src="@{/assets/js/SplitText.js}"></script>
+<script th:src="@{/assets/js/gsap-animation.js}"></script>
+<script th:src="@{/assets/js/tg-cursor.min.js}"></script>
+<script th:src="@{/assets/js/wow.min.js}"></script>
+<script th:src="@{/assets/js/main.js}"></script>
+</body>
+</html>
