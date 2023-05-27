@@ -31,21 +31,24 @@ public class AuthenticationController {
 
     @PostMapping("/registerUser")
     public String register(Model model, @Valid @ModelAttribute("user") User user, Errors errors, @RequestParam("cvFile") MultipartFile cvFile) throws IOException {
+        log.info("test1");
         if (errors.hasErrors()){
             return "/register";
         }
-
+        log.info("test2");
         if (userService.emailExists(user.getEmail())){
             model.addAttribute("checkEmail", true);
             log.info("email already exists");
             return "/register";
         }
+        log.info("test3");
 
         if (user.getPassword().equals(user.getCheckPass()) != true){
             model.addAttribute("checkPassResult", true);
             log.info("Confirmation password does not match !");
             return "/register";
         }
+        log.info("test4");
 
         AuthenticationResponse JWTToken = service.register(user, cvFile);
         return "redirect:/validation";
