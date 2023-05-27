@@ -30,6 +30,7 @@ public class SecurityConfiguration {
                         "/validation",
                         "/regenaratetoken",
                         "/newToken",
+                        "/public/registerUser",
                         //public_functionalities
                         "/assets/**",
                         "/public/**",
