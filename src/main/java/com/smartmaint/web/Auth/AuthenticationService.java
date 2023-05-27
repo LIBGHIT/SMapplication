@@ -103,7 +103,7 @@ public class AuthenticationService {
         String link = "http://localhost:8080/public/registrationConfirm?confirmToken="+confToken;
 
         emailSender.send(user.getEmail(),buildEmail(user.getFirstName().concat(" ").concat(user.getLastName()),link));
-
+        log.info("test111111111");
         return AuthenticationResponse.builder().jwtToken(jwtToken).confirmationToken(confToken).build();
     }
 

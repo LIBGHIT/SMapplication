@@ -25,7 +25,7 @@ public class EmailService implements EmailSender{
             helper.setText(email, true);
             helper.setTo(to);
             helper.setSubject("Confirm your Smart Maint email!");
-            helper.setFrom("verification@smartmaint.com");
+            helper.setFrom("postmaster@sandbox59cce440733045c8bd2fb72d4c017a30.mailgun.org");
             mailSender.send(mimeMessage);
         }catch (MessagingException e){
             log.error("failed to send email", e);

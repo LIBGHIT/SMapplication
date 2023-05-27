@@ -7,9 +7,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @SpringBootApplication
 @EnableMongoRepositories
 public class SmartmaintWebApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(SmartmaintWebApplication.class, args);
 	}
-
 }
