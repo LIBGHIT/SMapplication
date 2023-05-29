@@ -65,8 +65,8 @@
 <!-- header-area-end -->
 
 <!-- breadcrumb-area -->
-<section class="breadcrumb-area breadcrumb-bg" data-background="assets/img/bg/breadcrumb_bg.jpg">
-    <div class="breadcrumb-shape" data-background="assets/img/images/breadcrumb_shape.png"></div>
+<section class="breadcrumb-area breadcrumb-bg" th:data-background="@{/assets/img/bg/breadcrumb_bg.jpg}">
+    <div class="breadcrumb-shape" th:data-background="@{/assets/img/images/breadcrumb_shape.png}"></div>
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -74,7 +74,7 @@
                     <h2 class="title">Login</h2>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb" style="background-color: transparent;">
-                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                            <li class="breadcrumb-item"><a th:href="@{/home}">Home</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Login</li>
                         </ol>
                     </nav>
@@ -104,7 +104,7 @@
                 Your account is created and validated successfully
             </div>
 
-            <form id="userFormLogin" method="post" th:action="@{/public/authenticate}" th:object="${loginRequest}" class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 login-form-wrap">
+            <form id="userFormLogin" method="post" th:action="@{/authenticate}" th:object="${loginRequest}" class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 login-form-wrap">
                 <input type="hidden" name="redirectUrl" th:value="${redirectUrl}" />
                 <div class="form-group">
                     <input type="text" id="email" name="email" required th:field="*{email}" placeholder="Email Address" class="form-control">

@@ -23,7 +23,6 @@ import java.io.IOException;
 @Slf4j
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/public")
 public class AuthenticationController {
 
     private final AuthenticationService service;

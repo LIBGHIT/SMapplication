@@ -30,9 +30,12 @@ public class SecurityConfiguration {
                         "/validation",
                         "/regenaratetoken",
                         "/newToken",
+                        "/registerUser",
+                        "/registrationConfirm",
+                        "/authenticate",
+                        "/logout",
                         //public_functionalities
                         "/assets/**",
-                        "/public/**",
                         //messages
                         "/sendMessage",
                         "/contact",
