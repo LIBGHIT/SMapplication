@@ -73,7 +73,7 @@
                     <h2 class="title">Register</h2>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb" style="background-color: transparent;">
-                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                            <li class="breadcrumb-item"><a th:href="@{/home}">Home</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Register</li>
                         </ol>
                     </nav>
@@ -103,7 +103,7 @@
                 <div th:if="${typeNonValid != null AND typeNonValid == true}" class="alert alert-danger col-lg-6 offset-lg-3 col-md-8 offset-md-2">
                     File must be a PDF or image!
                 </div>
-                <form id="userFormRegister" method="post" th:action="@{/public/registerUser}"   th:object="${user}" class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 registration-form-wrap" enctype="multipart/form-data">
+                <form id="userFormRegister" method="post" th:action="@{/registerUser}"   th:object="${user}" class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 registration-form-wrap" enctype="multipart/form-data">
                     <div class="form-group">
                         <label>First Name<span class="required" style="color: red">*</span></label>
                         <input type="text" id="firstName" name="firstName" required th:field="*{firstName}" placeholder="First Name" class="form-control">

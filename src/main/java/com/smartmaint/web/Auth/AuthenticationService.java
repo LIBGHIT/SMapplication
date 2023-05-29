@@ -42,7 +42,7 @@ public class AuthenticationService {
 
 
     public AuthenticationResponse register(User userForm, MultipartFile cvFile) throws IOException {
-        log.info("testrole");
+
         Role role;
 
         if (userForm.getRoleStr().equals("ROLE_PERSONEL")){
@@ -52,7 +52,7 @@ public class AuthenticationService {
         }else {
             role = Role.ROLE_USER;
         }
-        log.info("testvaruser");
+
         var user = User.builder()
                 .firstName(userForm.getFirstName())
                 .lastName(userForm.getLastName())
@@ -100,8 +100,8 @@ public class AuthenticationService {
 
         tokenService.saveConfirmationToken(confirmationToken);
 
-        String link = "http://localhost:8080/public/registrationConfirm?confirmToken="+confToken;
-        log.info("testsendemail");
+        String link = "http://localhost:8080/registrationConfirm?confirmToken="+confToken;
+
         emailSender.send(user.getEmail(),buildEmail(user.getFirstName().concat(" ").concat(user.getLastName()),link));
         log.info("test111111111");
         return AuthenticationResponse.builder().jwtToken(jwtToken).confirmationToken(confToken).build();
@@ -203,7 +203,7 @@ public class AuthenticationService {
 
         tokenService.saveConfirmationToken(confirmationToken);
 
-        String link = "http://localhost:8080/public/registrationConfirm?confirmToken="+confToken;
+        String link = "http://localhost:8080/registrationConfirm?confirmToken="+confToken;
 
         emailSender.send(user.getEmail(),buildEmail(user.getFirstName().concat(" ").concat(user.getLastName()),link));
     }
