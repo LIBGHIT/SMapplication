@@ -29,7 +29,7 @@ public class AuthenticationController {
     private final UserService userService;
 
     @PostMapping("/registerUser")
-    public String register(Model model, @Valid @ModelAttribute("user") User user, Errors errors, @RequestParam("cvFile") MultipartFile cvFile) throws IOException {
+    public String register(Model model, @Valid @ModelAttribute("user") User user, Errors errors, @RequestParam(value = "cvFile", required = false) MultipartFile cvFile) throws IOException {
         if (errors.hasErrors()){
             return "/register";
         }
