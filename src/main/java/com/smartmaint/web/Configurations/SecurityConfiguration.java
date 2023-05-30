@@ -43,6 +43,7 @@ public class SecurityConfiguration {
                         "/about",
                         "/services",
                         "/blogs",
+                        "/files/**",
                         "/detailblog",
                         "/testform",
                         "/comingsoon").permitAll()
@@ -61,7 +62,6 @@ public class SecurityConfiguration {
                         "/users",
                         "/messages/**",
                         "/analytics",
-                        "/files/**",
                         "/maintenance").hasRole("ADMIN")
                 .requestMatchers("/logout").authenticated()
                 .anyRequest().authenticated()
