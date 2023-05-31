@@ -95,13 +95,29 @@
               <h2 class="title"  th:text="${blog.title}"></h2>
               <div th:utext="${blog.body}" style=" word-wrap: break-word;"></div>
 
+              <div class="blog-details-bottom">
+                <div class="row align-items-center">
+                  <div class="col-lg-4" style="margin-left: 450px;">
+                    <div class="blog-post-share">
+                      <h5 class="title">Share:</h5>
+                      <ul class="list-wrap">
+                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
             </div>
             <div class="comments-wrap">
               <h4 class="comments-wrap-title">Comments (<span th:text="${#lists.size(comment)}"></span>)</h4>
               <div class="latest-comments">
                 <ul class="list-wrap">
                   <li th:each="comment : ${comment}">
-                    <div class="comments-box">
+                  <div class="comments-box">
                       <div class="comments-avatar">
                         <img src="assets/img/blog/comment_avatar01.png" alt="">
                       </div>
@@ -109,37 +125,15 @@
                         <div class="avatar-name">
                           <h6 class="name">
                             <span th:text="${comment.firstName}"></span><span th:text="${comment.lastName}" style="margin-right: 14px;"></span>
-<!--                            <a href="#comment-form" class="comment-reply-link" th:data-comment-id="${comment.id}" style="margin-left: 190px;"><i class="fas fa-reply"></i>Reply</a>-->
                           </h6>
                           <span class="date" th:text="${#dates.format(comment.date, 'MMMM dd, yyyy   , HH:mm')}"></span>
                         </div>
                         <p th:text="${comment.text}"></p>
-                        <!-- Ajoutez ce code sous le texte du commentaire -->
-<!--                        <div th:if="${comment.userId == userId}">-->
-<!--                          <a th:href="@{/deleteComment/{id}(id=${comment.id})}" class="comment-reply-link"><i class="fas fa-trash"></i>Supprimer</a>-->
-<!--                        </div>-->
-
+                        <div th:if="${comment.userId == userId}">
+                          <a th:href="@{/comments/deleteComment/{id}(id=${comment.id},blogId=${comment.blogId})}" class="comment-reply-link"><i class="fas fa-trash"></i>Supprimer</a>
+                        </div>
                       </div>
                     </div>
-<!--                    <ul class="list-wrap children" th:each="reply : ${comment.replies}" th:if="${reply.parentCommentId == comment.id}">-->
-<!--                      <li>-->
-<!--                        <div class="comments-box">-->
-<!--                          <div class="comments-avatar">-->
-<!--                            <img src="assets/img/blog/comment_avatar02.png" alt="">-->
-<!--                          </div>-->
-<!--                          <div class="comments-text">-->
-<!--                            <div class="avatar-name">-->
-<!--                              <h6 class="name">-->
-<!--                                <span th:text="${reply.userId}"></span>-->
-<!--                                <a href="#comment-form" class="comment-reply-link"><i class="fas fa-reply"></i>Reply</a>-->
-<!--                              </h6>-->
-<!--                              <span class="date" th:text="${#dates.format(reply.date, 'MMMM dd, yyyy')}"></span>-->
-<!--                            </div>-->
-<!--                            <p th:text="${reply.text}"></p>-->
-<!--                          </div>-->
-<!--                        </div>-->
-<!--                      </li>-->
-<!--                    </ul>-->
                   </li>
                 </ul>
               </div>

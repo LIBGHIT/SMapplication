@@ -32,6 +32,8 @@ public class JwtHelper {
             User user = (User) userDetails;
             claims.put("firstName", user.getFirstName());
             claims.put("lastName", user.getLastName());
+            claims.put("ID_USER",user.getID_User());
+            claims.put("role",user.getRole());
         }
         return generateToken(claims, userDetails);
     }

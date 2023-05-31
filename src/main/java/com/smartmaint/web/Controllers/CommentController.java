@@ -45,56 +45,48 @@ public class CommentController {
         return commentService.getCommentsByBlogId(blogId);
     }
 
-
-
     @PostMapping("/addComment")
-    public String addComment(@RequestParam String text, @RequestParam String blogId,@RequestParam(required = false) String parentCommentId, Model model, HttpSession httpSession) {
+    public String addComment(@RequestParam String text, @RequestParam String blogId,
+                             @RequestParam(required = false) String parentCommentId,
+                             Model model, HttpSession httpSession){
         String token = (String) httpSession.getAttribute("JwtToken");
 
-        String firstName = ""; // Déclaration en dehors de la condition avec une valeur par défaut
-        String lastName = ""; // Déclaration en dehors de la condition avec une valeur par défaut
-        String userId = "";
+        String firstName = "";
+        String lastName  = "";
+        String userId    = "";
+        String role      = "";
 
-        // Vérifier si le token est présent
         if (token != null && !token.isEmpty()) {
-            // Extraire les informations du nom et du prénom à partir du token JWT
-             firstName = (String) jwtHelper.extractClaim(token, claims -> claims.get("firstName"));
-             lastName = (String) jwtHelper.extractClaim(token, claims -> claims.get("lastName"));
-            userId = (String) jwtHelper.extractClaim(token, claims -> claims.get("Id_User"));
 
+             firstName =    (String) jwtHelper.extractClaim(token, claims -> claims.get("firstName"));
+             lastName  =     (String) jwtHelper.extractClaim(token, claims -> claims.get("lastName"));
+             userId    =       (String) jwtHelper.extractClaim(token, claims -> claims.get("userId"));
+             role      =         (String) jwtHelper.extractClaim(token, claims -> claims.get("role"));
 
-
-            // Ajouter les informations au modèle pour les utiliser dans la vue
             model.addAttribute("firstName", firstName);
-            model.addAttribute("lastName", lastName);
-            // Ajouter l'ID de l'utilisateur au modèle pour l'utiliser dans la vue
-            model.addAttribute("userId", userId);
+            model.addAttribute("lastName" , lastName);
+            model.addAttribute("userId"   , userId);
+            model.addAttribute("role"     , role);
 
         }
 
         Comment comment = new Comment();
         comment.setText(text);
         comment.setBlogId(blogId);
-        comment.setDate(new Date()); //ajoutez la date actuelle au commentaire
+        comment.setDate(new Date());
         comment.setFirstName(firstName);
         comment.setLastName(lastName);
         comment.setUserId(userId);
-//        if (parentCommentId != null && !parentCommentId.isEmpty()) {
-//            comment.setParentCommentId(parentCommentId); // Définir l'ID du commentaire parent si présent
-//        }
+        comment.setRole(role);
 
-        commentService.saveComment(comment); //sauvegardez le commentaire dans la base de données
-        // Ajouter d'autres actions nécessaires ici, comme la redirection vers la page du blog
-        return "redirect:/detailblog/" + blogId; // redirige vers la page du blog après l'ajout d'un commentaire
+        commentService.saveComment(comment);
+        return "redirect:/detailblog/" + blogId;
     }
 
-
-
-    @GetMapping("/deleteBlog/{id}")
-    public String deleteComment(@PathVariable String id) {
+    @GetMapping("/deleteComment/{id}")
+    public String deleteComment(@PathVariable String id,@RequestParam String blogId) {
         commentService.deleteComment(id);
-        return "redirect:/detailblog";
+        return "redirect:/detailblog/" + blogId;
     }
-
 
 }

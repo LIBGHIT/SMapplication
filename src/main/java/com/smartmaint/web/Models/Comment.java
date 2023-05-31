@@ -25,10 +25,9 @@ public class Comment {
     private Date date;
     private String userId;
     private String blogId;
+    private String role;
     private String parentCommentId;
     private String firstName;
     private String lastName;
 
-    @DBRef
-    private List<Comment> replies = new ArrayList<>();
 }
