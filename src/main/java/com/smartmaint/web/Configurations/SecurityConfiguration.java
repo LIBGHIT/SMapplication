@@ -34,11 +34,16 @@ public class SecurityConfiguration {
                         "/registrationConfirm",
                         "/authenticate",
                         "/logout",
+                        "/forgotPass",
+                        "/newPassword",
+                        "/changePass",
+                        "/ChangePassword",
                         //public_functionalities
                         "/assets/**",
                         //messages
                         "/sendMessage",
                         "/contact",
+                        "/forgotPasswordRecovery",
                         //HEADER_NORMAL_USER
                         "/about",
                         "/services",

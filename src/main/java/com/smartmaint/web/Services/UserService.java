@@ -101,5 +101,13 @@ public class UserService implements UserDetailsService {
         return userRepo.findByRole("ROLE_USER", pageable);
     }
 
+    public void changePassword(String email, String newPassword) {
+        User user = userRepo.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found change pass"));
+
+        user.setPassword(passwordEncoder.encode(newPassword));
+        userRepo.save(user);
+    }
+
 }
 

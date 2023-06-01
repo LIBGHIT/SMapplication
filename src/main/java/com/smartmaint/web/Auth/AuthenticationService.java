@@ -10,6 +10,7 @@ import com.smartmaint.web.Services.FileService;
 import com.smartmaint.web.Services.UserService;
 import com.smartmaint.web.jwt.JwtHelper;
 import com.smartmaint.web.utilityClasses.Skills;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -99,8 +100,9 @@ public class AuthenticationService {
         tokenService.saveConfirmationToken(confirmationToken);
 
         String link = "http://localhost:8080/registrationConfirm?confirmToken="+confToken;
+        String purpose = "Thank you for registering. Please click on the below link to activate your account:";
 
-        emailSender.send(user.getEmail(),buildEmail(user.getFirstName().concat(" ").concat(user.getLastName()),link));
+        emailSender.send(user.getEmail(),buildEmail(user.getFirstName().concat(" ").concat(user.getLastName()),link, purpose));
         log.info("test111111111");
         return AuthenticationResponse.builder().jwtToken(jwtToken).confirmationToken(confToken).build();
     }
@@ -182,6 +184,25 @@ public class AuthenticationService {
                 confirmationToken.getEmail());
     }
 
+    public void confirmPassToken(String token, HttpSession session) {
+        ConfirmationToken confirmationToken = tokenService
+                .getToken(token)
+                .orElseThrow(() ->
+                        new IllegalStateException("token not found"));
+
+        if (confirmationToken.getConfirmedAt() != null) {
+            throw new IllegalStateException("Invalid Token pass!");
+        }
+
+        LocalDateTime expiredAt = confirmationToken.getExpiredAt();
+
+        if (expiredAt.isBefore(LocalDateTime.now())) {
+            session.removeAttribute("emailPassRecover");
+            throw new IllegalStateException("token expired pass!");
+        }
+        tokenService.setConfirmedAt(token);
+    }
+
 
     public void regenerateToken(String email){
 
@@ -202,12 +223,37 @@ public class AuthenticationService {
         tokenService.saveConfirmationToken(confirmationToken);
 
         String link = "http://localhost:8080/registrationConfirm?confirmToken="+confToken;
+        String purpose = " Thank you for registering. Please click on the below link to activate your account: ";
 
-        emailSender.send(user.getEmail(),buildEmail(user.getFirstName().concat(" ").concat(user.getLastName()),link));
+        emailSender.send(user.getEmail(),buildEmail(user.getFirstName().concat(" ").concat(user.getLastName()),link, purpose));
+    }
+
+    public void recoverPassword(String email){
+
+        var user = userRepo.findByEmail(email)
+                .orElseThrow(() -> new IllegalStateException("Email recover does not exist!"));//il faut supprimer session apres cela(cas d'echoue)
+
+        tokenService.deleteTokenByEmail(email);
+
+        String confToken = UUID.randomUUID().toString();
+
+        ConfirmationToken confirmationToken = new ConfirmationToken(
+                confToken,
+                LocalDateTime.now(),
+                LocalDateTime.now().plusMinutes(30),
+                email
+        );
+
+        tokenService.saveConfirmationToken(confirmationToken);
+
+        String link = "http://localhost:8080/forgotPasswordRecovery?confirmToken="+confToken;
+        String purpose = " Thank you for registering. Please click on the below link to change your password: ";
+
+        emailSender.send(user.getEmail(),buildEmail(user.getFirstName().concat(" ").concat(user.getLastName()),link, purpose));
     }
 
 
-    private String buildEmail(String name, String link) {
+    private String buildEmail(String name, String link,String purpose) {
         return "<div style=\"font-family:Helvetica,Arial,sans-serif;font-size:16px;margin:0;color:#0b0c0c\">\n" +
                 "\n" +
                 "<span style=\"display:none;font-size:1px;color:#fff;max-height:0\"></span>\n" +
@@ -263,7 +309,7 @@ public class AuthenticationService {
                 "      <td width=\"10\" valign=\"middle\"><br></td>\n" +
                 "      <td style=\"font-family:Helvetica,Arial,sans-serif;font-size:19px;line-height:1.315789474;max-width:560px\">\n" +
                 "        \n" +
-                "            <p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\">Hi " + name + ",</p><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> Thank you for registering. Please click on the below link to activate your account: </p><blockquote style=\"Margin:0 0 20px 0;border-left:10px solid #b1b4b6;padding:15px 0 0.1px 15px;font-size:19px;line-height:25px\"><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> <a href=\"" + link + "\">Activate Now</a> </p></blockquote>\n Link will expire in 30 minutes. <p>See you soon</p>" +
+                "            <p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\">Hi " + name + ",</p><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\">" + purpose + "</p><blockquote style=\"Margin:0 0 20px 0;border-left:10px solid #b1b4b6;padding:15px 0 0.1px 15px;font-size:19px;line-height:25px\"><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> <a href=\"" + link + "\">Activate Now</a> </p></blockquote>\n Link will expire in 30 minutes. <p>See you soon</p>" +
                 "        \n" +
                 "      </td>\n" +
                 "      <td width=\"10\" valign=\"middle\"><br></td>\n" +
@@ -274,5 +320,9 @@ public class AuthenticationService {
                 "  </tbody></table><div class=\"yj6qo\"></div><div class=\"adL\">\n" +
                 "\n" +
                 "</div></div>";
+    }
+
+    public void changePassword(String email, String newPassword) {
+        userService.changePassword(email,newPassword);
     }
 }

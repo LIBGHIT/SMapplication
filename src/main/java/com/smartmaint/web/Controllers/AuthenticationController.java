@@ -36,13 +36,11 @@ public class AuthenticationController {
 
         if (userService.emailExists(user.getEmail())){
             model.addAttribute("checkEmail", true);
-            log.info("email already exists");
             return "/register";
         }
 
         if (user.getPassword().equals(user.getCheckPass()) != true){
             model.addAttribute("checkPassResult", true);
-            log.info("Confirmation password does not match !");
             return "/register";
         }
 
@@ -56,6 +54,11 @@ public class AuthenticationController {
         return "redirect:/login?validationSuccess=true";
     }
 
+    @GetMapping("/forgotPasswordRecovery")
+    public String confirmPass(@RequestParam("confirmToken") String token, HttpSession session) {
+        service.confirmPassToken(token, session);
+        return "redirect:/ChangePassword";
+    }
 
     @PostMapping("/authenticate")
     public String authenticate(@ModelAttribute("loginRequest") AuthenticationRequest authenticationRequest,Model model, HttpSession httpSession){
@@ -68,7 +71,6 @@ public class AuthenticationController {
             httpSession.removeAttribute("checkPoint");
             return checkPoint;
         }
-
         return "redirect:/home";
     }
 

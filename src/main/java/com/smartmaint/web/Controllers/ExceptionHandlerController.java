@@ -21,6 +21,10 @@ public class ExceptionHandlerController {
             return "redirect:/regenaratetoken?tokenExpired=true";
         } else if (ex.getMessage().equals("Email is not validated!")) {
             return "redirect:/login?emailNotValidated=true";
+        } else if (ex.getMessage().equals("Invalid Token pass!")) {
+            return "redirect:/login?passTokenUsed=true";
+        } else if (ex.getMessage().equals("token expired pass!")) {
+            return "redirect:/login?passTokenExpired=true";
         }
         return "/home";
     }
