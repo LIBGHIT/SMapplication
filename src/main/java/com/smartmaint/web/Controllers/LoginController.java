@@ -57,7 +57,7 @@ public class LoginController {
     }
     @PostMapping("/newToken")
     public String displayNewTokenPage(@RequestParam("email") String email){
-        authenticationService.regenerateToken(email);
+        authenticationService.regenerateToken(email.toLowerCase());
         return "redirect:/validation";
     }
 
@@ -68,8 +68,8 @@ public class LoginController {
 
     @PostMapping("/newPassword")
     public String newPassword(@RequestParam("email") String email, HttpSession session){
-        session.setAttribute("emailPassRecover", email);
-        authenticationService.recoverPassword(email);
+        session.setAttribute("emailPassRecover", email.toLowerCase());
+        authenticationService.recoverPassword(email.toLowerCase());
         return "redirect:/validation";
     }
 
@@ -82,7 +82,7 @@ public class LoginController {
     @PostMapping("/changePass")
     public String ChangePassword(@ModelAttribute("newPassword") String newPassword, HttpSession session){
         String email = (String) session.getAttribute("emailPassRecover");
-        authenticationService.changePassword(email, newPassword);
+        authenticationService.changePassword(email.toLowerCase(), newPassword);
         session.removeAttribute("emailPassRecover");
         return "redirect:/login?passwordChanged=true";
     }

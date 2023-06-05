@@ -1,5 +1,6 @@
 <!doctype html >
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -101,7 +102,7 @@
                   <label>Role</label>
                   <select th:field="*{roleStr}" class="form-control" aria-label=".form-select-lg example">
                     <option selected value="ROLE_PERSONEL">SM User</option>
-                    <option value="ROLE_ADMIN">Admin User</option>
+                    <option sec:authorize="hasRole('ROLE_SUPERADMIN')" value="ROLE_ADMIN">Admin User</option>
                   </select>
                 </div>
 

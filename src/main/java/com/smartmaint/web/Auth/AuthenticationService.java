@@ -55,7 +55,7 @@ public class AuthenticationService {
         var user = User.builder()
                 .firstName(userForm.getFirstName())
                 .lastName(userForm.getLastName())
-                .email(userForm.getEmail())
+                .email(userForm.getEmail().toLowerCase())
                 .password(passwordEncoder.encode(userForm.getPassword()))
                 .role(role)
                 .sector(userForm.getSector())
@@ -123,7 +123,7 @@ public class AuthenticationService {
         var user = User.builder()
                 .firstName(userForm.getFirstName())
                 .lastName(userForm.getLastName())
-                .email(userForm.getEmail())
+                .email(userForm.getEmail().toLowerCase())
                 .password(passwordEncoder.encode(userForm.getPassword()))
                 .enabled(true)
                 .locked(false)
@@ -137,7 +137,7 @@ public class AuthenticationService {
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
 
-        var user = userRepo.findByEmail(request.getEmail())
+        var user = userRepo.findByEmail(request.getEmail().toLowerCase())
                 .orElseThrow(() -> new IllegalStateException("Invalid email or password!"));
 
         if(!user.getEnabled()){
@@ -147,7 +147,7 @@ public class AuthenticationService {
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
-                            request.getEmail(),
+                            request.getEmail().toLowerCase(),
                             request.getPassword()
                     )
             );
@@ -181,7 +181,7 @@ public class AuthenticationService {
 
         tokenService.setConfirmedAt(token);
         userService.enableUser(
-                confirmationToken.getEmail());
+                confirmationToken.getEmail().toLowerCase());
     }
 
     public void confirmPassToken(String token, HttpSession session) {
@@ -206,10 +206,10 @@ public class AuthenticationService {
 
     public void regenerateToken(String email){
 
-        var user = userRepo.findByEmail(email)
+        var user = userRepo.findByEmail(email.toLowerCase())
                 .orElseThrow(() -> new IllegalStateException("Email does not exist!"));
 
-        tokenService.deleteTokenByEmail(email);
+        tokenService.deleteTokenByEmail(email.toLowerCase());
 
         String confToken = UUID.randomUUID().toString();
 
@@ -217,7 +217,7 @@ public class AuthenticationService {
                 confToken,
                 LocalDateTime.now(),
                 LocalDateTime.now().plusMinutes(30),
-                email
+                email.toLowerCase()
         );
 
         tokenService.saveConfirmationToken(confirmationToken);
@@ -225,15 +225,15 @@ public class AuthenticationService {
         String link = "http://localhost:8080/registrationConfirm?confirmToken="+confToken;
         String purpose = " Thank you for registering. Please click on the below link to activate your account: ";
 
-        emailSender.send(user.getEmail(),buildEmail(user.getFirstName().concat(" ").concat(user.getLastName()),link, purpose));
+        emailSender.send(user.getEmail().toLowerCase(),buildEmail(user.getFirstName().concat(" ").concat(user.getLastName()),link, purpose));
     }
 
     public void recoverPassword(String email){
 
-        var user = userRepo.findByEmail(email)
+        var user = userRepo.findByEmail(email.toLowerCase())
                 .orElseThrow(() -> new IllegalStateException("Email recover does not exist!"));//il faut supprimer session apres cela(cas d'echoue)
 
-        tokenService.deleteTokenByEmail(email);
+        tokenService.deleteTokenByEmail(email.toLowerCase());
 
         String confToken = UUID.randomUUID().toString();
 
@@ -241,7 +241,7 @@ public class AuthenticationService {
                 confToken,
                 LocalDateTime.now(),
                 LocalDateTime.now().plusMinutes(30),
-                email
+                email.toLowerCase()
         );
 
         tokenService.saveConfirmationToken(confirmationToken);
@@ -249,7 +249,7 @@ public class AuthenticationService {
         String link = "http://localhost:8080/forgotPasswordRecovery?confirmToken="+confToken;
         String purpose = " Thank you for registering. Please click on the below link to change your password: ";
 
-        emailSender.send(user.getEmail(),buildEmail(user.getFirstName().concat(" ").concat(user.getLastName()),link, purpose));
+        emailSender.send(user.getEmail().toLowerCase(),buildEmail(user.getFirstName().concat(" ").concat(user.getLastName()),link, purpose));
     }
 
 
@@ -323,6 +323,6 @@ public class AuthenticationService {
     }
 
     public void changePassword(String email, String newPassword) {
-        userService.changePassword(email,newPassword);
+        userService.changePassword(email.toLowerCase(),newPassword);
     }
 }

@@ -55,7 +55,7 @@
                                     <li th:class="${currentURI != null and #strings.startsWith(currentURI, '/courses') ? 'active' : ''}"
                                         sec:authorize="isAuthenticated()"><a th:href="@{/courses}">Courses</a></li>
                                     <li th:class="${currentURI != null and #strings.startsWith(currentURI, '/dashboard') ? 'active' : ''}"
-                                        sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/dashboard}">Dashboard</a>
+                                        sec:authorize="hasRole('ROLE_ADMIN') OR hasRole('ROLE_SUPERADMIN')"><a th:href="@{/dashboard}">Dashboard</a>
                                     </li>
 
 <!--                                    <li>-->

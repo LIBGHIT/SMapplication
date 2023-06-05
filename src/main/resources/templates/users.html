@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -259,7 +260,7 @@
                                     <td rowspan="4" style="border: 1px solid black;" th:text="${user.lastName}"></td>
                                     <td rowspan="4" style="border: 1px solid black;" th:text="${user.email}"></td>
                                     <td rowspan="4" style="border: 1px solid black;">
-                                        <a class="btn btn-sm btn-light" th:href="@{/deleteUser/{id}(id=${user.ID_User})}" onclick="return confirm('Voulez-vous vraiment supprimer cet utilisateur ?')">
+                                        <a sec:authorize="hasRole('ROLE_SUPERADMIN')" class="btn btn-sm btn-light" th:href="@{/deleteUser/{id}(id=${user.ID_User})}" onclick="return confirm('Voulez-vous vraiment supprimer cet utilisateur ?')">
                                             <i class="fa fa-fw fa-times text-danger" title="delete"></i>
                                         </a>
                                     </td>

@@ -34,7 +34,7 @@ public class AuthenticationController {
             return "/register";
         }
 
-        if (userService.emailExists(user.getEmail())){
+        if (userService.emailExists(user.getEmail().toLowerCase())){
             model.addAttribute("checkEmail", true);
             return "/register";
         }

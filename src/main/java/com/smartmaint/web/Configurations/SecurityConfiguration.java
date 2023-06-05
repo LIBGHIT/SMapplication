@@ -67,8 +67,7 @@ public class SecurityConfiguration {
                         "/messages/**",
                         "/analytics",
                         "/files/**",
-                        "/maintenance").hasRole("ADMIN")
-                .requestMatchers("/logout").authenticated()
+                        "/maintenance").hasAnyRole("ADMIN", "SUPERADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login")
