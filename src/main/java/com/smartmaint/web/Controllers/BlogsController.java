@@ -2,6 +2,7 @@ package com.smartmaint.web.Controllers;
 
 import com.smartmaint.web.Models.Blogs;
 import com.smartmaint.web.Models.Comment;
+import com.smartmaint.web.Repositorises.BlogRepo;
 import com.smartmaint.web.Services.BlogService;
 import com.smartmaint.web.Services.CommentService;
 import com.smartmaint.web.Services.FileService;
@@ -36,7 +37,8 @@ public class BlogsController {
     JwtHelper jwtHelper;
     @Autowired
     private FileService fileService;
-
+    @Autowired
+    private BlogRepo blogRepo;
     @RequestMapping("/detailblog")
     public String displayDetailBlogPage(){
         return "detailblog.html";
@@ -215,8 +217,6 @@ public class BlogsController {
             return "redirect:/"; // Redirigez vers la page d'accueil si le blog n'est pas trouvé.
         }
     }
-
-
 
 
 }
