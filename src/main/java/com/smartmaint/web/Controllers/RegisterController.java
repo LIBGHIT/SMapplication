@@ -54,14 +54,11 @@ public class RegisterController {
 
     @PostMapping("/admin/Registrations")
     public String adminRegistration(Model model, @Valid @ModelAttribute("adminUser") User user, Errors errors, HttpSession session){
-        log.info("the user content >>> {]", user);
         if (errors.hasErrors()){
             return "/adminRegistrations";
         }
 
-        log.info("test1 passed");
-
-        if (userService.emailExists(user.getEmail())){
+        if (userService.emailExists(user.getEmail().toLowerCase())){
             model.addAttribute("checkEmail", true);
             log.info("email already exists");
             return "/adminRegistrations";

@@ -34,16 +34,20 @@ public class SecurityConfiguration {
                         "/registrationConfirm",
                         "/authenticate",
                         "/logout",
+                        "/forgotPass",
+                        "/newPassword",
+                        "/changePass",
+                        "/ChangePassword",
                         //public_functionalities
                         "/assets/**",
                         //messages
                         "/sendMessage",
                         "/contact",
+                        "/forgotPasswordRecovery",
                         //HEADER_NORMAL_USER
                         "/about",
                         "/services",
                         "/blogs",
-                        "/files/**",
                         "/detailblog",
                         "/testform",
                         "/comingsoon").permitAll()
@@ -62,8 +66,8 @@ public class SecurityConfiguration {
                         "/users",
                         "/messages/**",
                         "/analytics",
-                        "/maintenance").hasRole("ADMIN")
-                .requestMatchers("/logout").authenticated()
+                        "/files/**",
+                        "/maintenance").hasAnyRole("ADMIN", "SUPERADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login")

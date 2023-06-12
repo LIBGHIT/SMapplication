@@ -20,7 +20,7 @@ public class HomeController {
     @Autowired
     JwtHelper jwtHelper;
 
-    @RequestMapping(value = {"", "/", "home"})
+    @RequestMapping("home")
     public String displayHomePage(HttpSession httpSession, Model model){
         String token = (String) httpSession.getAttribute("JwtToken");
         if (token != null && !token.isEmpty()) {
@@ -31,6 +31,12 @@ public class HomeController {
         }
         return "home.html";
     }
+
+    @RequestMapping(value = {"", "/"})
+    public String displayHomePages(HttpSession httpSession, Model model){
+        return "redirect:/home";
+    }
+
 
 
 }

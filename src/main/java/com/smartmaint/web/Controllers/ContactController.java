@@ -103,13 +103,6 @@ public class ContactController {
         return "contact.html";
     }
 
-
-
-
-
-
-
-
     @GetMapping("/messages")
     public String displayMessagesPage(Model model){
         return "messages";

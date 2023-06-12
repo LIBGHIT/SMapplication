@@ -31,7 +31,7 @@ public class ConfirmationTokenService {
     }
 
     public void deleteTokenByEmail(String email) {
-        confirmationTokenRepo.deleteByEmail(email);
+        confirmationTokenRepo.deleteByEmail(email.toLowerCase());
     }
 
 

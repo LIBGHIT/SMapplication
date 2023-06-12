@@ -29,25 +29,20 @@ public class AuthenticationController {
     private final UserService userService;
 
     @PostMapping("/registerUser")
-    public String register(Model model, @Valid @ModelAttribute("user") User user, Errors errors, @RequestParam("cvFile") MultipartFile cvFile) throws IOException {
-        log.info("test1");
+    public String register(Model model, @Valid @ModelAttribute("user") User user, Errors errors, @RequestParam(value = "cvFile", required = false) MultipartFile cvFile) throws IOException {
         if (errors.hasErrors()){
             return "/register";
         }
-        log.info("test2");
-        if (userService.emailExists(user.getEmail())){
+
+        if (userService.emailExists(user.getEmail().toLowerCase())){
             model.addAttribute("checkEmail", true);
-            log.info("email already exists");
             return "/register";
         }
-        log.info("test3");
 
         if (user.getPassword().equals(user.getCheckPass()) != true){
             model.addAttribute("checkPassResult", true);
-            log.info("Confirmation password does not match !");
             return "/register";
         }
-        log.info("test4");
 
         AuthenticationResponse JWTToken = service.register(user, cvFile);
         return "redirect:/validation";
@@ -59,6 +54,11 @@ public class AuthenticationController {
         return "redirect:/login?validationSuccess=true";
     }
 
+    @GetMapping("/forgotPasswordRecovery")
+    public String confirmPass(@RequestParam("confirmToken") String token, HttpSession session) {
+        service.confirmPassToken(token, session);
+        return "redirect:/ChangePassword";
+    }
 
     @PostMapping("/authenticate")
     public String authenticate(@ModelAttribute("loginRequest") AuthenticationRequest authenticationRequest,Model model, HttpSession httpSession){
@@ -71,7 +71,6 @@ public class AuthenticationController {
             httpSession.removeAttribute("checkPoint");
             return checkPoint;
         }
-
         return "redirect:/home";
     }
 

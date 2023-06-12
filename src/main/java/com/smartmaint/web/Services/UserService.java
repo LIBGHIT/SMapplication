@@ -1,8 +1,10 @@
 package com.smartmaint.web.Services;
 
 import com.smartmaint.web.Models.Blogs;
+import com.smartmaint.web.Models.Role;
 import com.smartmaint.web.Models.User;
 import com.smartmaint.web.Repositorises.UserRepo;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,11 +25,29 @@ public class UserService implements UserDetailsService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    private static final String ADMIN_USERNAME = "admindefault@smartmaint.com";
+    private static final String ADMIN_PASSWORD = "12345678";
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepo.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("username not found"));
+    }
+
+    @PostConstruct
+    public void initAdminUser() {
+        if (!emailExists(ADMIN_USERNAME)) {
+            User adminUser = new User();
+            adminUser.setFirstName("Default Admin");
+            adminUser.setLastName("User");
+            adminUser.setEmail(ADMIN_USERNAME.toLowerCase());
+            adminUser.setPassword(passwordEncoder.encode(ADMIN_PASSWORD));
+            adminUser.setEnabled(true);
+            adminUser.setLocked(false);
+            adminUser.setRole(Role.ROLE_SUPERADMIN);
+
+            userRepo.save(adminUser);
+        }
     }
 
     public User findById(String id){
@@ -99,6 +119,14 @@ public class UserService implements UserDetailsService {
     public Page<User> getUsersPageable(int page, int size) {
         PageRequest pageable = PageRequest.of(page, size);
         return userRepo.findByRole("ROLE_USER", pageable);
+    }
+
+    public void changePassword(String email, String newPassword) {
+        User user = userRepo.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found change pass"));
+
+        user.setPassword(passwordEncoder.encode(newPassword));
+        userRepo.save(user);
     }
 
 }
