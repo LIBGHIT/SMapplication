@@ -34,7 +34,7 @@ public class RegisterController {
         model.addAttribute("typeNonValid", typeNonValid);
         model.addAttribute("cvSize", cvSize);
         model.addAttribute("user", new User());
-        return "register.html";
+        return "register";
     }
 
     @RequestMapping("/adminRegistrations")
