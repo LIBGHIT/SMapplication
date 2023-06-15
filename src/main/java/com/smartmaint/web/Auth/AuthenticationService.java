@@ -99,7 +99,7 @@ public class AuthenticationService {
 
         tokenService.saveConfirmationToken(confirmationToken);
 
-        String link = "http://localhost:8080/registrationConfirm?confirmToken="+confToken;
+        String link = "http://www.mr-xp.com/registrationConfirm?confirmToken="+confToken;
         String purpose = "Thank you for registering. Please click on the below link to activate your account:";
 
         emailSender.send(user.getEmail(),buildEmail(user.getFirstName().concat(" ").concat(user.getLastName()),link, purpose));
@@ -222,7 +222,7 @@ public class AuthenticationService {
 
         tokenService.saveConfirmationToken(confirmationToken);
 
-        String link = "http://localhost:8080/registrationConfirm?confirmToken="+confToken;
+        String link = "http://www.mr-xp.com/registrationConfirm?confirmToken="+confToken;
         String purpose = " Thank you for registering. Please click on the below link to activate your account: ";
 
         emailSender.send(user.getEmail().toLowerCase(),buildEmail(user.getFirstName().concat(" ").concat(user.getLastName()),link, purpose));
@@ -246,7 +246,7 @@ public class AuthenticationService {
 
         tokenService.saveConfirmationToken(confirmationToken);
 
-        String link = "http://localhost:8080/forgotPasswordRecovery?confirmToken="+confToken;
+        String link = "http://www.mr-xp.com/forgotPasswordRecovery?confirmToken="+confToken;
         String purpose = " Thank you for registering. Please click on the below link to change your password: ";
 
         emailSender.send(user.getEmail().toLowerCase(),buildEmail(user.getFirstName().concat(" ").concat(user.getLastName()),link, purpose));
