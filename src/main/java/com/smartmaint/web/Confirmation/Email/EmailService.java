@@ -21,11 +21,11 @@ public class EmailService implements EmailSender{
     public void send(String to, String email) {
         try {
             MimeMessage mimeMessage = mailSender.createMimeMessage();
-            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage,"utf-8");
+            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
             helper.setText(email, true);
             helper.setTo(to);
             helper.setSubject("Confirm your Smart Maint email!");
-            helper.setFrom("postmaster@sandbox59cce440733045c8bd2fb72d4c017a30.mailgun.org");
+            helper.setFrom("Smartmaint23@gmail.com"); // utilisez l'adresse e-mail de votre compte Gmail
             mailSender.send(mimeMessage);
         }catch (MessagingException e){
             log.error("failed to send email", e);
