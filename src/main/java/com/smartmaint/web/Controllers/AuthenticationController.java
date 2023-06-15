@@ -31,22 +31,24 @@ public class AuthenticationController {
     @PostMapping("/registerUser")
     public String register(Model model, @Valid @ModelAttribute("user") User user, Errors errors, @RequestParam(value = "cvFile", required = false) MultipartFile cvFile) throws IOException {
         if (errors.hasErrors()){
-            return "/register";
+            model.addAttribute("errorMessages", errors.getAllErrors());
+            return "register";
         }
 
         if (userService.emailExists(user.getEmail().toLowerCase())){
             model.addAttribute("checkEmail", true);
-            return "/register";
+            return "register";
         }
 
-        if (user.getPassword().equals(user.getCheckPass()) != true){
+        if (!user.getPassword().equals(user.getCheckPass())){
             model.addAttribute("checkPassResult", true);
-            return "/register";
+            return "register";
         }
 
         AuthenticationResponse JWTToken = service.register(user, cvFile);
         return "redirect:/validation";
     }
+
 
     @GetMapping("/registrationConfirm")
     public String confirm(@RequestParam("confirmToken") String token) {
