@@ -29,7 +29,7 @@ public class AdminProfile {
     @RequestMapping("/adminprofile")
     public String displayAdminProfileUpdate(Model model){
         model.addAttribute("updateAdmin", new User());
-        return "adminProfile";
+        return "adminProfilePassword";
     }
 
 
