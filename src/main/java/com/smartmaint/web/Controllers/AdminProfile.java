@@ -26,7 +26,7 @@ public class AdminProfile {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @RequestMapping("/adminprofile")
+    @RequestMapping("/adminProfile")
     public String displayAdminProfileUpdate(Model model){
         model.addAttribute("updateAdmin", new User());
         return "adminProfilePassword";
