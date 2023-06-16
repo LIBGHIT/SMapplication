@@ -38,13 +38,12 @@ public class AdminProfile {
     public String changePassAdmin(Model model, HttpSession httpSession, @ModelAttribute("updateAdmin") User user){
         if(user.getPassword().isEmpty()){
             model.addAttribute("checkPassResultempty", true);
-            return "adminprofile";
+            return "adminProfile";
         }
-
 
         if(!user.getPassword().equals(user.getCheckPass())){
             model.addAttribute("checkPassResult", true);
-            return "adminprofile";
+            return "adminProfile";
         }
 
         String token = (String) httpSession.getAttribute("JwtToken");
@@ -52,18 +51,18 @@ public class AdminProfile {
             String email = (String) jwtHelper.extractUsername(token);
             log.info("email >>> {}", email);
 
-
             var user_ = userRepo.findByEmail(email.toLowerCase())
                     .orElseThrow(() -> new IllegalStateException("Email recover does not exist!"));
 
             if (!passwordEncoder.matches(user.getOldPassword(), user_.getPassword())) {
                 model.addAttribute("checkOldPass", true);
-                return "adminprofile";
+                return "adminProfile";
             }
             userService.changePassword(email, user.getPassword());
             model.addAttribute("passChanged", true);
-            return "adminprofile";
+            return "adminProfile";
         }
-        return "adminprofile";
+        return "adminProfile";
     }
+
 }
