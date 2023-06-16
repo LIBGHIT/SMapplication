@@ -71,6 +71,13 @@
           </a>
         </li>
         <li class="nav-main-item">
+          <a th:href="@{/adminprofile}"
+             class="nav-main-link active">
+            <i class="nav-main-link-icon fa fa-envelope"></i>
+            <span class="nav-main-link-name">Edit Profile</span>
+          </a>
+        </li>
+        <li class="nav-main-item">
           <a th:classappend="${module == 'payment' ? 'active' : ''}" th:href="@{/payment}"
              class="nav-main-link active">
             <i class="nav-main-link-icon fa fa-credit-card"></i>

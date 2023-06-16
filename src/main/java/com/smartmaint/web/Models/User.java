@@ -53,6 +53,7 @@ public class User implements UserDetails {
 
     transient private String roleStr;
     transient private String checkPass;
+    transient private String oldPassword;
 
 
     @Override
