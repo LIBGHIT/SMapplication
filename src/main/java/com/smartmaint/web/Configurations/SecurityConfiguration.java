@@ -68,8 +68,8 @@ public class SecurityConfiguration {
                         "/analytics",
                         "/files/**",
                         "/maintenance",
-                        "/admin/profile",
-                        "/admin/changePassword").hasAnyRole("ADMIN", "SUPERADMIN")
+                        "/admin/changePassword",
+                        "/adminProfile").hasAnyRole("ADMIN", "SUPERADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login")

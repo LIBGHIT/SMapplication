@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Slf4j
 @Controller
@@ -32,18 +33,18 @@ public class AdminProfile {
         return "adminProfilePassword";
     }
 
-
-    //@ModelAttribute("updateAdmin") User user
     @PostMapping("/admin/changePassword")
-    public String changePassAdmin(Model model, HttpSession httpSession, @ModelAttribute("updateAdmin") User user){
+    public ModelAndView changePassAdmin(HttpSession httpSession, @ModelAttribute("updateAdmin") User user){
+        ModelAndView modelAndView = new ModelAndView("adminProfilePassword");
+
         if(user.getPassword().isEmpty()){
-            model.addAttribute("checkPassResultempty", true);
-            return "adminProfile";
+            modelAndView.addObject("checkPassResultempty", true);
+            return modelAndView;
         }
 
         if(!user.getPassword().equals(user.getCheckPass())){
-            model.addAttribute("checkPassResult", true);
-            return "adminProfile";
+            modelAndView.addObject("checkPassResult", true);
+            return modelAndView;
         }
 
         String token = (String) httpSession.getAttribute("JwtToken");
@@ -55,14 +56,15 @@ public class AdminProfile {
                     .orElseThrow(() -> new IllegalStateException("Email recover does not exist!"));
 
             if (!passwordEncoder.matches(user.getOldPassword(), user_.getPassword())) {
-                model.addAttribute("checkOldPass", true);
-                return "adminProfile";
+                modelAndView.addObject("checkOldPass", true);
+                return modelAndView;
             }
             userService.changePassword(email, user.getPassword());
-            model.addAttribute("passChanged", true);
-            return "adminProfile";
+            modelAndView.addObject("passChanged", true);
+            return modelAndView;
         }
-        return "adminProfile";
+        return modelAndView;
     }
+
 
 }
