@@ -149,23 +149,12 @@
                     <input type="hidden" name="role" th:field="*{roleStr}" value="ROLE_USER">
 
                     <div class="form-group">
-                        <label for="skills">Skills</label><br>
-                        <select id="skills" th:field="*{skills.skill_1}" class="form-select form-select-default mb-3 col-6 d-inline-block" aria-label=".form-select-lg example">
+                        <label>Skills</label><br>
+                        <select th:field="*{skills.skill_1}" class="form-select form-select-default mb-3 col-6 d-inline-block" aria-label=".form-select-lg example">
                             <option selected value="NONE">Choose a skill</option>
-                            <option value="Safety management">Safety management</option>
-                            <option value="Preventive maintenance execution">Preventive maintenance execution</option>
-                            <option value="Corrective maintenance execution">Corrective maintenance execution</option>
-                            <option value="Contractor management">Contractor management</option>
-                            <option value="CMMS">CMMS</option>
-                            <option value="Work planning">Work planning</option>
-                            <option value="Work scheduling">Work scheduling</option>
-                            <option value="Turnarounds management">Turnarounds management</option>
-                            <option value="Spare parts procurement">Spare parts procurement</option>
-                            <option value="Spare parts inventory management">Spare parts inventory management</option>
-                            <option value="Installing">Installing</option>
-                            <option value="Commissioning">Commissioning</option>
-                            <option value="Organizational skills">Organizational skills</option>
+                            <option th:each="skill : ${skills}" th:value="${skill.name}" th:text="${skill.name}"></option>
                         </select>
+
                         <div class="form-check form-check-inline col-3 d-inline-block" style="margin-left:40px;margin-right: -12px;">
                             <label class="form-check-label"><input th:field="*{skills.skill_1_experience}" class="form-check-input" value="Experienced" type="radio" name="skill_1" style="font-size: 15px;height: 18px; width: 18px;">Experienced</label>
                         </div>
@@ -176,20 +165,9 @@
                     <div class="form-group">
                         <select th:field="*{skills.skill_2}" class="form-select form-select-default mb-3 col-6 d-inline-block" aria-label=".form-select-lg example">
                             <option selected value="NONE">Choose a skill</option>
-                            <option value="Safety management">Safety management</option>
-                            <option value="Preventive maintenance execution">Preventive maintenance execution</option>
-                            <option value="Corrective maintenance execution">Corrective maintenance execution</option>
-                            <option value="Contractor management">Contractor management</option>
-                            <option value="CMMS">CMMS</option>
-                            <option value="Work planning">Work planning</option>
-                            <option value="Work scheduling">Work scheduling</option>
-                            <option value="Turnarounds management">Turnarounds management</option>
-                            <option value="Spare parts procurement">Spare parts procurement</option>
-                            <option value="Spare parts inventory management">Spare parts inventory management</option>
-                            <option value="Installing">Installing</option>
-                            <option value="Commissioning">Commissioning</option>
-                            <option value="Organizational skills">Organizational skills</option>
+                            <option th:each="skill : ${skills}" th:value="${skill.name}" th:text="${skill.name}"></option>
                         </select>
+
                         <div class="form-check form-check-inline col-3 d-inline-block" style="margin-left:40px;margin-right: -12px;">
                             <label class="form-check-label"><input th:field="*{skills.skill_2_experience}" class="form-check-input" value="Experienced" type="radio" name="skill_2" style="font-size: 15px;height: 18px; width: 18px;">Experienced</label>
                         </div>
@@ -200,20 +178,9 @@
                     <div class="form-group">
                         <select th:field="*{skills.skill_3}" class="form-select form-select-default mb-3 col-6 d-inline-block" aria-label=".form-select-lg example">
                             <option selected value="NONE">Choose a skill</option>
-                            <option value="Safety management">Safety management</option>
-                            <option value="Preventive maintenance execution">Preventive maintenance execution</option>
-                            <option value="Corrective maintenance execution">Corrective maintenance execution</option>
-                            <option value="Contractor management">Contractor management</option>
-                            <option value="CMMS">CMMS</option>
-                            <option value="Work planning">Work planning</option>
-                            <option value="Work scheduling">Work scheduling</option>
-                            <option value="Turnarounds management">Turnarounds management</option>
-                            <option value="Spare parts procurement">Spare parts procurement</option>
-                            <option value="Spare parts inventory management">Spare parts inventory management</option>
-                            <option value="Installing">Installing</option>
-                            <option value="Commissioning">Commissioning</option>
-                            <option value="Organizational skills">Organizational skills</option>
+                            <option th:each="skill : ${skills}" th:value="${skill.name}" th:text="${skill.name}"></option>
                         </select>
+
                         <div class="form-check form-check-inline col-3 d-inline-block" style="margin-left:40px;margin-right: -12px;">
                             <label class="form-check-label"><input th:field="*{skills.skill_3_experience}" class="form-check-input" value="Experienced" type="radio" name="skill_3" style="height: 18px; width: 18px;font-size: 15px;">Experienced</label>
                         </div>
