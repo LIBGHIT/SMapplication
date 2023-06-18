@@ -71,7 +71,8 @@ public class SecurityConfiguration {
                         "/admin/changePassword",
                         "/adminProfile",
                         "/RegistrationsSettings",
-                        "/admin/addSkill").hasAnyRole("ADMIN", "SUPERADMIN")
+                        "/admin/addSkill",
+                        "/admin/deleteSkill").hasAnyRole("ADMIN", "SUPERADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login")

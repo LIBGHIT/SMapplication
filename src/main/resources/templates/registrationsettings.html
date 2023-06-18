@@ -56,23 +56,52 @@
       <div class="alert alert-success" role="alert" th:if="${skillAdded}">
         Skill added successfully!
       </div>
+      <div class="alert alert-success" role="alert" th:if="${skillDeleted}">
+        Skill deleted successfully!
+      </div>
 
 
 
-      <div class="block">
+<!--      <div class="block">-->
+<!--        <div class="block-content">-->
+<!--          <div class="row justify-content-center push">-->
+<!--            <div class="col-md-10">-->
+<!--              <div class="form-group">-->
+<!--                <label>Current Skills</label><br>-->
+<!--                <select class="form-control">-->
+<!--                  <option selected value="NONE">ALL SKILLS</option>-->
+<!--                  <option th:each="skill : ${skills}" th:value="${skill.name}" th:text="${skill.name}"></option>-->
+<!--                </select>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+
+      <form th:action="@{/admin/deleteSkill}" method="POST">
         <div class="block-content">
           <div class="row justify-content-center push">
             <div class="col-md-10">
               <div class="form-group">
                 <label>Current Skills</label><br>
-                <select class="form-control">
+                <select name="selectedSkill" class="form-control">
                   <option selected value="NONE">ALL SKILLS</option>
-                  <option th:each="skill : ${skills}" th:value="${skill.name}" th:text="${skill.name}"></option>
+                  <option th:each="skill : ${skills}" th:value="${skill.id}" th:text="${skill.name}"></option>
                 </select>
               </div>
             </div>
           </div>
         </div>
+        <div class="block-content bg-body-light">
+          <div class="row justify-content-center push">
+            <div class="col-md-10">
+              <button type="submit" class="btn btn-alt-primary">
+                <i class="fa fa-fw fa-check mr-1"></i> Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+
 
       <form th:action="@{/admin/addSkill}" th:object="${skill}" method="POST">
           <div class="block-content">
@@ -94,7 +123,6 @@
               </div>
             </div>
           </div>
-        </div>
       </form>
       <!-- END New Post -->
     </div>

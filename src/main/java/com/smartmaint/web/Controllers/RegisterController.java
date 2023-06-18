@@ -84,24 +84,41 @@ public class RegisterController {
 
 
     //SKILLS
-    @RequestMapping("/RegistrationsSettings")
-    public String displayRegisterationSettings(Model model){
 
+    @RequestMapping("/RegistrationsSettings")
+    public String displayRegistrationSettings(Model model) {
         List<Skill> skills = skillService.getAllSkills();
         model.addAttribute("skills", skills);
-
         model.addAttribute("skill", new Skill());
-
         return "registrationsettings";
     }
+
 
     @PostMapping("/admin/addSkill")
     public ModelAndView addNewSkill(@ModelAttribute("skill") Skill skill, Model model){
         ModelAndView modelAndView = new ModelAndView("registrationsettings");
+        modelAndView.addObject("skill", new Skill());
 
         skillService.addSkill(skill);
 
+        List<Skill> skills = skillService.getAllSkills();
+        modelAndView.addObject("skills", skills);
+
         modelAndView.addObject("skillAdded", true);
+        return modelAndView;
+    }
+
+    @PostMapping("/admin/deleteSkill")
+    public ModelAndView deleteSkill(@RequestParam("selectedSkill") String selectedSkillId) {
+        ModelAndView modelAndView = new ModelAndView("registrationsettings");
+        modelAndView.addObject("skill", new Skill());
+
+        skillService.deleteSkillById(selectedSkillId);
+
+        List<Skill> skills = skillService.getAllSkills();
+        modelAndView.addObject("skills", skills);
+
+        modelAndView.addObject("skillDeleted", true);
         return modelAndView;
     }
 
