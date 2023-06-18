@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
 
@@ -78,15 +79,16 @@ public class AuthenticationController {
 
 
     @GetMapping("/logout")
-    public String logout(HttpServletRequest request) {
+    public ModelAndView logout(HttpServletRequest request) {
         // Invalidate the session
         request.getSession().invalidate();
 
         // Clear the authentication context
         SecurityContextHolder.getContext().setAuthentication(null);
 
-        // Redirect to the login page or another appropriate page
-        return "redirect:/home";
+        // Redirect to the home page
+        ModelAndView modelAndView = new ModelAndView("redirect:/home");
+        return modelAndView;
     }
 
 }
