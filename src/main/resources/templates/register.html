@@ -149,7 +149,7 @@
                     <input type="hidden" name="role" th:field="*{roleStr}" value="ROLE_USER">
 
                     <div class="form-group">
-                        <label>Skills</label><br>
+                        <label>Skills (Related to Maintenance and Reliability)</label><br>
                         <select th:field="*{skills.skill_1}" class="form-select form-select-default mb-3 col-6 d-inline-block" aria-label=".form-select-lg example">
                             <option selected value="NONE">Choose a skill</option>
                             <option th:each="skill : ${skills}" th:value="${skill.name}" th:text="${skill.name}"></option>
