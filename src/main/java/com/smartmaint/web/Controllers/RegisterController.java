@@ -2,7 +2,9 @@ package com.smartmaint.web.Controllers;
 
 import com.smartmaint.web.Auth.AuthenticationResponse;
 import com.smartmaint.web.Auth.AuthenticationService;
+import com.smartmaint.web.Models.Skill;
 import com.smartmaint.web.Models.User;
+import com.smartmaint.web.Services.SkillService;
 import com.smartmaint.web.Services.UserService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -16,8 +18,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -26,11 +30,14 @@ public class RegisterController {
     private UserService userService;
     @Autowired
     private AuthenticationService service;
+    @Autowired
+    private SkillService skillService;
     @RequestMapping("/register")
     public String displayRegisterPage(Model model,
                                       @RequestParam(value = "typeNonValid", required = false) boolean typeNonValid,
                                       @RequestParam(value = "cvSize", required = false) boolean cvSize){
-
+        List<Skill> skills = skillService.getAllSkills();
+        model.addAttribute("skills", skills);
         model.addAttribute("typeNonValid", typeNonValid);
         model.addAttribute("cvSize", cvSize);
         model.addAttribute("user", new User());
@@ -76,8 +83,43 @@ public class RegisterController {
     }
 
 
+    //SKILLS
+
+    @RequestMapping("/RegistrationsSettings")
+    public String displayRegistrationSettings(Model model) {
+        List<Skill> skills = skillService.getAllSkills();
+        model.addAttribute("skills", skills);
+        model.addAttribute("skill", new Skill());
+        return "registrationsettings";
+    }
 
 
+    @PostMapping("/admin/addSkill")
+    public ModelAndView addNewSkill(@ModelAttribute("skill") Skill skill, Model model){
+        ModelAndView modelAndView = new ModelAndView("registrationsettings");
+        modelAndView.addObject("skill", new Skill());
 
+        skillService.addSkill(skill);
+
+        List<Skill> skills = skillService.getAllSkills();
+        modelAndView.addObject("skills", skills);
+
+        modelAndView.addObject("skillAdded", true);
+        return modelAndView;
+    }
+
+    @PostMapping("/admin/deleteSkill")
+    public ModelAndView deleteSkill(@RequestParam("selectedSkill") String selectedSkillId) {
+        ModelAndView modelAndView = new ModelAndView("registrationsettings");
+        modelAndView.addObject("skill", new Skill());
+
+        skillService.deleteSkillById(selectedSkillId);
+
+        List<Skill> skills = skillService.getAllSkills();
+        modelAndView.addObject("skills", skills);
+
+        modelAndView.addObject("skillDeleted", true);
+        return modelAndView;
+    }
 
 }

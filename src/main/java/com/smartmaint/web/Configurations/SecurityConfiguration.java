@@ -19,6 +19,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfiguration {
     private final AccessTokenFilter accessTokenFilter;
     private final AuthenticationProvider authenticationProvider;
+    private final CustomLogoutSuccessHandler logoutSuccessHandler;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -68,11 +69,18 @@ public class SecurityConfiguration {
                         "/analytics",
                         "/files/**",
                         "/maintenance",
-                        "/admin/profile",
-                        "/admin/changePassword").hasAnyRole("ADMIN", "SUPERADMIN")
+                        "/admin/changePassword",
+                        "/adminProfile",
+                        "/RegistrationsSettings",
+                        "/admin/addSkill",
+                        "/admin/deleteSkill").hasAnyRole("ADMIN", "SUPERADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login")
+                .and()
+                .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessHandler(logoutSuccessHandler)
                 .and()
                 .sessionManagement()
                 .and()
