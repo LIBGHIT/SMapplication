@@ -123,8 +123,8 @@
                       </div>
                       <div class="comments-text">
                         <div class="avatar-name">
-                          <h6 class="name">
-                            <span th:text="${comment.firstName}"></span><span th:text="${comment.lastName}" style="margin-right: 14px;"></span>
+                          <h6>
+                            <span th:text="${comment.firstName}"></span><span th:text="${comment.lastName}" style="margin-left: 10px;"></span>
                           </h6>
                           <span class="date" th:text="${#dates.format(comment.date, 'MMMM dd, yyyy   , HH:mm')}"></span>
                         </div>
