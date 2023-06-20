@@ -57,16 +57,6 @@
                                     <li th:class="${currentURI != null and #strings.startsWith(currentURI, '/dashboard') ? 'active' : ''}"
                                         sec:authorize="hasRole('ROLE_ADMIN') OR hasRole('ROLE_SUPERADMIN')"><a th:href="@{/dashboard}">Dashboard</a>
                                     </li>
-
-<!--                                    <li>-->
-<!--                                        <a sec:authorize="!isAuthenticated()" th:href="@{/login}" class="header-log-reg" style="display: inline-block;color: #fff;background-color: orange;border-radius: 5px;padding: 8px 16px;line-height: 50px;vertical-align: middle;">Login</a>-->
-<!--                                    </li>-->
-<!--                                    <li>-->
-<!--                                        <a sec:authorize="!isAuthenticated()" th:href="@{/register}" class="header-log-reg" style="display: inline-block;color: #fff;background-color: orange;border-radius: 5px;padding: 8px 16px;line-height: 50px;vertical-align: middle;">Register</a>-->
-<!--                                    </li>-->
-<!--                                    <li>-->
-<!--                                        <a sec:authorize="!isAuthenticated()" th:href="@{/register}" class="header-log-reg" style="display: inline-block;color: #fff;background-color: orange;border-radius: 5px;padding: 8px 16px;line-height: 50px;vertical-align: middle;">Register</a>-->
-<!--                                    </li>-->
                                 </ul>
                             </div>
                             <div sec:authorize="!isAuthenticated()" class="header-action d-md-block">
