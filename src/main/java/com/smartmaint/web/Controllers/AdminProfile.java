@@ -53,7 +53,7 @@ public class AdminProfile {
             log.info("email >>> {}", email);
 
             var user_ = userRepo.findByEmail(email.toLowerCase())
-                    .orElseThrow(() -> new IllegalStateException("Email recover does not exist!"));
+                    .orElseThrow(() -> new IllegalStateException("Email admin profile does not exist!"));
 
             if (!passwordEncoder.matches(user.getOldPassword(), user_.getPassword())) {
                 modelAndView.addObject("checkOldPass", true);

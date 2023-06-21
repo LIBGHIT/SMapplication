@@ -18,7 +18,5 @@ public class Skills {
     private String skill_2_experience;
     private String skill_3_experience;
     private String skill_4_experience;
-
-
     //getters and setters
 }

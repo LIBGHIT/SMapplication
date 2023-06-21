@@ -1,0 +1,257 @@
+<!doctype html>
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Smart Maint</title>
+    <meta name="description" content="Smart Maint">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/assets/img/favicon.png}">
+    <!--bootstrap css-->
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/bootstrap.min2.css}">
+    <!--owl carousel css-->
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/owl.carousel.min2.css}">
+    <!--magnific popup css-->
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/magnific-popup2.css}">
+    <!--font awesome css-->
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/font-awesome.min2.css}">
+    <!--meanmenu css-->
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/meanmenu2.css}">
+    <!--animate css-->
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/animate2.css}">
+    <!--main css-->
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/style2.css}">
+    <!--responsive css-->
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/responsive2.css}">
+
+    <!-- CSS here -->
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/animate.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/magnific-popup.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/fontawesome-all.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/odometer.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/slick.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/tg-cursor.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/default.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/jarallax.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/style.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/responsive.css}">
+
+</head>
+
+<body>
+<!-- Preloader-start -->
+<div id="preloader">
+    <div class="ta-preloader-block">
+        <div class="ta-spinner-eff">
+            <div class="ta-bar ta-bar-top"></div>
+            <div class="ta-bar ta-bar-right"></div>
+            <div class="ta-bar ta-bar-bottom"></div>
+            <div class="ta-bar ta-bar-left"></div>
+        </div>
+    </div>
+</div>
+<!-- Preloader-start-end -->
+
+<!-- Scroll-top -->
+<button class="scroll-top scroll-to-target" data-target="html">
+    <i class="fas fa-level-up-alt"></i>
+</button>
+<!-- Scroll-top-end-->
+
+<!-- start header-top-area -->
+<div th:replace="~{header :: header}"></div>
+<!--end header-->
+<!--start hero area-->
+<section class="breadcrumb-area breadcrumb-bg" th:data-background="@{/assets/img/bg/breadcrumb_bg.jpg}">
+    <div class="breadcrumb-shape" th:data-background="@{/assets/img/images/breadcrumb_shape.png}"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-content">
+                    <h2 class="title">Profile</h2>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb" style="background-color: transparent;">
+                            <li class="breadcrumb-item"><a th:href="@{/home}">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Profile</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--end hero area-->
+<!--start register area-->
+<section class="register-area two">
+    <div class="container">
+        <div  class="row">
+            <div th:if="${emptyPass != null AND emptyPass == true}" class="alert alert-danger col-lg-6 offset-lg-3 col-md-8 offset-md-2">
+                New Password must not be empty!
+            </div>
+            <div th:if="${checkOldPass != null AND checkOldPass == true}" class="alert alert-danger col-lg-6 offset-lg-3 col-md-8 offset-md-2">
+                Incorrect old password!
+            </div>
+            <div th:if="${updated != null && updated == true}" class="alert alert-success col-lg-6 offset-lg-3 col-md-8 offset-md-2">
+                Account updated successfully!
+            </div>
+
+            <form id="userFormUpdate" method="post" th:action="@{/update}" th:object="${user}" class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 registration-form-wrap" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label>First Name :</label>
+                    <p id="firstName" class="form-control" th:text="${currentUser.firstName}"></p>
+                </div>
+                <div class="form-group">
+                    <label>Last Name</label>
+                    <p id="lastName" class="form-control" th:text="${currentUser.lastName}"></p>
+                </div>
+                <div class="form-group">
+                    <label>E-Mail</label>
+                    <p id="email" class="form-control" th:text="${currentUser.email}"></p>
+                </div>
+                <div class="form-group">
+                    <label>Old Password<span class="required" style="color: red">*</span></label>
+                    <input type="password" id="oldPassword" required th:field="*{oldPassword}" placeholder="Old Password" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>New Password<span class="required" style="color: red">*</span></label>
+                    <input type="password" placeholder="New Password" class="form-control" th:field="*{password}">
+                </div>
+                <h5>Optional:</h5>
+
+                <div class="form-group">
+                    <label for="sector">Sector</label><br>
+                    <select id="sector" name="sector" th:field="*{sector}" class="form-select form-select-default mb-3 col-6 d-inline-block">
+                        <option selected value="">Choose a sector</option>
+                        <option value="Agriculture">Agriculture</option>
+                        <option value="Construction">Construction</option>
+                        <option value="Education">Education</option>
+                        <option value="Finance">Finance</option>
+                        <option value="Healthcare">Healthcare</option>
+                        <option value="Information Technology">Information Technology</option>
+                        <option value="Manufacturing">Manufacturing</option>
+                        <option value="Mining">Mining</option>
+                        <option value="Retail">Retail</option>
+                        <option value="Transportation">Transportation</option>
+                        <option value="Utilities">Utilities</option>
+                        <!-- Add as many sectors as needed -->
+                    </select>
+                </div>
+
+                <input type="hidden" name="firstName" th:value="${currentUser.firstName}">
+                <input type="hidden" name="lastName" th:value="${currentUser.lastName}">
+                <input type="hidden" name="email" th:value="${currentUser.email}">
+
+
+                <input type="hidden" name="role" th:field="*{roleStr}" value="ROLE_USER">
+
+                <div class="form-group">
+                    <label>Skills (Related to Maintenance and Reliability)</label><br>
+                    <select th:field="*{skills.skill_1}" class="form-select form-select-default mb-3 col-6 d-inline-block" aria-label=".form-select-lg example">
+                        <option selected value="NONE">Choose a skill</option>
+                        <option th:each="skill : ${skills}" th:value="${skill.name}" th:text="${skill.name}"></option>
+                    </select>
+
+                    <div class="form-check form-check-inline col-3 d-inline-block" style="margin-left:40px;margin-right: -12px;">
+                        <label class="form-check-label"><input th:field="*{skills.skill_1_experience}" class="form-check-input" value="Experienced" type="radio" name="skill_1" style="font-size: 15px;height: 18px; width: 18px;">Experienced</label>
+                    </div>
+                    <div class="form-check form-check-inline col-2 d-inline-block" style="margin-right: 10px;">
+                        <label class="form-check-label"><input th:field="*{skills.skill_1_experience}" class="form-check-input" value="Expert" type="radio" name="skill_1" style="font-size: 15px;height: 18px; width: 18px; line-height: -10px;">Expert</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <select th:field="*{skills.skill_2}" class="form-select form-select-default mb-3 col-6 d-inline-block" aria-label=".form-select-lg example">
+                        <option selected value="NONE">Choose a skill</option>
+                        <option th:each="skill : ${skills}" th:value="${skill.name}" th:text="${skill.name}"></option>
+                    </select>
+
+                    <div class="form-check form-check-inline col-3 d-inline-block" style="margin-left:40px;margin-right: -12px;">
+                        <label class="form-check-label"><input th:field="*{skills.skill_2_experience}" class="form-check-input" value="Experienced" type="radio" name="skill_2" style="font-size: 15px;height: 18px; width: 18px;">Experienced</label>
+                    </div>
+                    <div class="form-check form-check-inline col-2 d-inline-block" style="margin-right: 10px;">
+                        <label class="form-check-label"><input th:field="*{skills.skill_2_experience}" class="form-check-input" value="Expert" type="radio" name="skill_2" style="font-size: 15px;height: 18px; width: 18px; line-height: -10px;">Expert</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <select th:field="*{skills.skill_3}" class="form-select form-select-default mb-3 col-6 d-inline-block" aria-label=".form-select-lg example">
+                        <option selected value="NONE">Choose a skill</option>
+                        <option th:each="skill : ${skills}" th:value="${skill.name}" th:text="${skill.name}"></option>
+                    </select>
+
+                    <div class="form-check form-check-inline col-3 d-inline-block" style="margin-left:40px;margin-right: -12px;">
+                        <label class="form-check-label"><input th:field="*{skills.skill_3_experience}" class="form-check-input" value="Experienced" type="radio" name="skill_3" style="height: 18px; width: 18px;font-size: 15px;">Experienced</label>
+                    </div>
+                    <div class="form-check form-check-inline col-2 d-inline-block" style="margin-right: 10px;">
+                        <label class="form-check-label"><input th:field="*{skills.skill_3_experience}" class="form-check-input" value="Expert" type="radio" name="skill_3" style="height: 18px; width: 18px; line-height: -10px;font-size: 15px;">Expert</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input th:field="*{skills.skill_4}" type="text" placeholder="Other skill not mentioned" class="form-control col-6 d-inline-block">
+                    <div class="form-check form-check-inline col-3 d-inline-block" style="margin-left:40px;margin-right: -12px;">
+                        <label  class="form-check-label"><input th:field="*{skills.skill_4_experience}" class="form-check-input" value="Experienced" type="radio" name="skill_4" style="height: 18px; width: 18px;font-size: 15px;">Experienced</label>
+                    </div>
+                    <div class="form-check form-check-inline col-2 d-inline-block"style="margin-right: 10px;">
+                        <label class="form-check-label"><input th:field="*{skills.skill_4_experience}" class="form-check-input" value="Expert" type="radio" name="skill_4" style="height: 18px; width: 18px; line-height: -10px;font-size: 15px;">Expert</label>
+                    </div>
+                </div>
+
+
+                <!-- Remove CV file input -->
+                <div class="register-btn">
+                    <input class="w-100 btn btn-lg btn-primary" type="submit" value="Update">
+                </div>
+            </form>
+
+        </div>
+    </div>
+</section>
+<!--end register area-->
+<!--start footer-area-->
+<div th:replace="~{footer :: footer}"></div>
+<!--end footer-->
+
+
+<!--jQuery js-->
+<script th:src="@{/assets/js/jquery-3.3.1.min.js}"></script>
+<!--proper js-->
+<script th:src="@{/assets/js/popper.min.js}"></script>
+<!--bootstrap js-->
+<script th:src="@{/assets/js/bootstrap.min.js}"></script>
+<!--mainmenu js-->
+<script th:src="@{/assets/js/meanmenu.min.js}"></script>
+<!--counterup js-->
+<script th:src="@{/assets/js/counterup.min.js}"></script>
+<!--waypoints js-->
+<script th:src="@{/assets/js/waypoints.js}"></script>
+<!--magnic popup js-->
+<script th:src="@{/assets/js/magnific-popup.min.js}"></script>
+<!--owl carousel js-->
+<script th:src="@{/assets/js/owl.carousel.min.js}"></script>
+<!--syotimer js-->
+<script th:src="@{/assets/js/syotimer.min.js}"></script>
+<!--main js-->
+<script th:src="@{/assets/js/custom.js}"></script>
+
+<!-- JS here -->
+<script th:src="@{/assets/js/vendor/jquery-3.6.0.min.js}"></script>
+<script th:src="@{/assets/js/bootstrap.min.js}"></script>
+<script th:src="@{/assets/js/imagesloaded.pkgd.min.js}"></script>
+<script th:src="@{/assets/js/jquery.magnific-popup.min.js}"></script>
+<script th:src="@{/assets/js/jquery.odometer.min.js}"></script>
+<script th:src="@{/assets/js/jquery.appear.js}"></script>
+<script th:src="@{/assets/js/slick.min.js}"></script>
+<script th:src="@{/assets/js/slick-animation.min.js}"></script>
+<script th:src="@{/assets/js/ajax-form.js}"></script>
+<script th:src="@{/assets/js/jarallax.min.js}"></script>
+<script th:src="@{/assets/js/parallax.min.js}"></script>
+<script th:src="@{/assets/js/gsap.js}"></script>
+<script th:src="@{/assets/js/ScrollTrigger.js}"></script>
+<script th:src="@{/assets/js/SplitText.js}"></script>
+<script th:src="@{/assets/js/gsap-animation.js}"></script>
+<script th:src="@{/assets/js/tg-cursor.min.js}"></script>
+<script th:src="@{/assets/js/wow.min.js}"></script>
+<script th:src="@{/assets/js/main.js}"></script>
+</body>
+
+</html>

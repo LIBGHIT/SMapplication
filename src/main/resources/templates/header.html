@@ -80,9 +80,9 @@
 
 
                             <div sec:authorize="isAuthenticated()" th:if="${currentURI != null and #strings.startsWith(currentURI, '/home')}" style="position: absolute; top: 100px; right: 20px;">
-                                    <p>
+                                    <a th:href="@{/profile}">
                                         Welcome <span th:text="${firstName}" style="color: blue;">Prénom</span> <span
-                                            th:text="${lastName}" style="color: blue;">Nom</span></p>
+                                            th:text="${lastName}" style="color: blue;">Nom</span></a>
                             </div>
 
 

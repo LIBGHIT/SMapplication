@@ -1,5 +1,6 @@
 <!doctype html>
-<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -96,7 +97,7 @@
 
               <div class="blog-details-bottom">
                 <div class="row align-items-center">
-                  <div class="col-lg-4" style="margin-left: 450px;">
+                  <div class="col-lg-8"> <!-- Updated class -->
                     <div class="blog-post-share">
                       <h5 class="title">Share:</h5>
                       <ul class="list-wrap">
@@ -110,6 +111,7 @@
                   </div>
                 </div>
               </div>
+
 
             </div>
             <div class="comments-wrap">
@@ -139,7 +141,7 @@
               </div>
             </div>
 
-            <div class="comment-respond" id="comment-form">
+            <div sec:authorize="!hasRole('PERSONEL')" class="comment-respond" id="comment-form">
               <h3 class="comment-reply-title">Write Your Comment</h3>
               <form class="comment-form" th:action="@{/comments/addComment}" method="post">
                 <div class="form-grp">
