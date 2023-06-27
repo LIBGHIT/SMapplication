@@ -113,6 +113,7 @@
                 Your account is created and validated successfully
             </div>
 
+
             <form id="userFormLogin" method="post" th:action="@{/authenticate}" th:object="${loginRequest}" class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 login-form-wrap">
                 <input type="hidden" name="redirectUrl" th:value="${redirectUrl}" />
                 <div class="form-group">
